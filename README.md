@@ -11,7 +11,7 @@ Team Members:
   - Ronald Durham
 
 Vision Statement:
-  - We plan to code a visual representation of the classic car game War. 
+  - We plan to code a visual representation of the classic card game War. 
 
 Motivation:
   - All of our group memmbers are interested and enjoy games.
