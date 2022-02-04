@@ -1,6 +1,8 @@
-# CSPB_3308_Team_3
+# CSPB 3308 Team 3
 
-Project Title:
+## Project Milestone 1: Project Proposal
+
+### Project Title:
 
 Team Members:
   - Jordan Sims
@@ -26,5 +28,8 @@ Development Method:
   - Scrum?
   - Kanban?
   - Waterfall?
+  - With specifics...
 
 Project Tracking Software:
+  - Trello?
+  - Github Project?
