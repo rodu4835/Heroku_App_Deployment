@@ -2,7 +2,7 @@
 
 ## Project Milestone 1: Project Proposal
 
-### Project Title:
+### Project Title: WAR, What is it Good for? This Project
 
 Team Members:
   - Jordan Sims
