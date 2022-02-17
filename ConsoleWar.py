@@ -1,3 +1,5 @@
+import random
+
 #This is the protoype of the war game to run on console. - JS
 
 # Below, I started the deck. I figured the best way to program it would be a list of tuples, with the key being the card designation
@@ -18,4 +20,31 @@ officialDeck = [
     ('Q-C', 12), ('K-C', 13)
 ]
 
-print(len(officialDeck))
+
+# Part 1 - Shuffle
+# Below is the function to shuffle the deck, and then cut the deck and deal to each player
+
+def shuffle(deck):
+    funcDeck = [] # empty deck that will be used to rebuild the official deck
+    for i in deck:
+        funcDeck.append(i) # this rebuilds the offical deck. 
+    shuffledDeck = [] # empty deck that will be filled through this funciton
+    while len(funcDeck) != 0: # While cards are still in the original deck
+        cardsRemaining = len(funcDeck) # Number of cards still in the original deck
+        chosenCard = random.randint(0, cardsRemaining - 1) # Choose a random card in original deck
+        shuffledDeck.append(funcDeck.pop(chosenCard)) #puts the chosen card in the shuffled deck
+    return shuffledDeck
+
+def splitDeck(shuffledDeck): #This splits the shuffled deck in 2 and returns 2 decks for 2 players
+    half = len(shuffledDeck)//2
+    return shuffledDeck[:half], shuffledDeck[half:]
+
+
+shuffledDeck = shuffle(officialDeck) #shuffles the original deck
+p1Deck, p2Deck = splitDeck(shuffledDeck)
+
+for i in p1Deck:
+    print("P1 - " + i[0])
+
+print(len(p1Deck))
+print(len(p2Deck))
