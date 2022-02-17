@@ -1,5 +1,4 @@
 import random
-
 #This is the protoype of the war game to run on console. - JS
 
 # Below, I started the deck. I figured the best way to program it would be a list of tuples, with the key being the card designation
@@ -39,12 +38,32 @@ def splitDeck(shuffledDeck): #This splits the shuffled deck in 2 and returns 2 d
     half = len(shuffledDeck)//2
     return shuffledDeck[:half], shuffledDeck[half:]
 
-
 shuffledDeck = shuffle(officialDeck) #shuffles the original deck
 p1Deck, p2Deck = splitDeck(shuffledDeck)
 
-for i in p1Deck:
-    print("P1 - " + i[0])
+def playGame(p1, p2):
+    while (len(p1) != 52) or (len(p2) != 52): # established the endgame rules for War, where one player needs the whole deck to win
+        currentPot = [] # Sets up an empty list at the beginning of each round for the cards that will be used in that round
+        # Below, we first establish the two values to be tuples that are stand ins before the round begins. These will be replaced in the
+        # following while loop
+        p1Card = ("No Card", 0) 
+        p2Card = ("No Card", 0)
+        while p1Card[1] == p2Card[1]: #this while loop makes sure that the cards do not have the same value. If they do, the next cards will be drawn
+            p1Card = p1.pop(0)
+            p2Card = p2.pop(0)
+            currentPot.extend((p1Card, p2Card))
+            if p1Card[1] > p2Card[1]: #if player one has the bigger card, he gets the pot
+                for i in range(0, len(currentPot)):
+                    p1.append(currentPot[i])
+                    print("Player one wins the round!")
+            elif p1Card[1] < p2Card[1]: #if player two has the bigger card, he gets the pot
+                for i in range(0, len(currentPot)):
+                    p2.append(currentPot[i])
+                    print("Player two wins the round!")
 
-print(len(p1Deck))
-print(len(p2Deck))
+    if len(p1) == 52:
+        print("Player 1 has won!")
+    else:
+        print("Player 2 has won!")
+
+playGame(p1Deck, p2Deck)
