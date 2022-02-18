@@ -41,29 +41,63 @@ def splitDeck(shuffledDeck): #This splits the shuffled deck in 2 and returns 2 d
 shuffledDeck = shuffle(officialDeck) #shuffles the original deck
 p1Deck, p2Deck = splitDeck(shuffledDeck)
 
-def playGame(p1, p2):
-    while (len(p1) != 52) or (len(p2) != 52): # established the endgame rules for War, where one player needs the whole deck to win
-        currentPot = [] # Sets up an empty list at the beginning of each round for the cards that will be used in that round
-        # Below, we first establish the two values to be tuples that are stand ins before the round begins. These will be replaced in the
-        # following while loop
-        p1Card = ("No Card", 0) 
-        p2Card = ("No Card", 0)
-        while p1Card[1] == p2Card[1]: #this while loop makes sure that the cards do not have the same value. If they do, the next cards will be drawn
-            p1Card = p1.pop(0)
-            p2Card = p2.pop(0)
-            currentPot.extend((p1Card, p2Card))
-            if p1Card[1] > p2Card[1]: #if player one has the bigger card, he gets the pot
-                for i in range(0, len(currentPot)):
-                    p1.append(currentPot[i])
-                    print("Player one wins the round!")
-            elif p1Card[1] < p2Card[1]: #if player two has the bigger card, he gets the pot
-                for i in range(0, len(currentPot)):
-                    p2.append(currentPot[i])
-                    print("Player two wins the round!")
 
-    if len(p1) == 52:
-        print("Player 1 has won!")
-    else:
-        print("Player 2 has won!")
+def compareFun(p1Card, p2Card, currentPot, p1Deck, p2Deck):
+    print("P1 Card: " + str(p1Card))
+    print("P2 Card: " + str(p2Card))
+    if p1Card[1] > p2Card[1]: #if player one has the bigger card, he gets the pot
+        winner = "p1"
+    elif p1Card[1] < p2Card[1]: #if player two has the bigger card, he gets the pot
+        winner = "p2"        
+    elif p1Card[1] == p2Card[1]: # If the cards have the samve value, draw 4 more cards and the 4th card drawn will be checked
+            try:
+                for i in range(0, 3):
+                    currentPot.append(p1Deck.pop(0))
+                    currentPot.append(p2Deck.pop(0))
+                    p1Card2 = p1Deck.pop(0)
+                    p2Card2 = p2Deck.pop(0)
+                    currentPot.extend((p1Card2, p2Card2))
+                    winner, currentPot = compareFun(p1Card2, p2Card2, currentPot, p1Deck, p2Deck)
+            except:
+                print("running exception")
+                if p1Card[1] > p2Card[1]:  # if player one has the bigger card, he gets the pot
+                    winner = "p1"
+                elif p1Card[1] < p2Card[1]:  # if player two has the bigger card, he gets the pot
+                    winner = "p2"
+    return winner, currentPot
+            
+
+
+def playGame(p1, p2):
+    count = 0
+    if count > 100000:
+        print("This game has ended in a draw!!!")
+        return
+    p1len = len(p1)
+    p2len = len(p2)
+    while p1len != 0 or p2len != 0: # established the endgame rules for War, where one player needs the whole deck to win
+        if len(p2) == 0:
+            print("Player 1 has won!")
+            break
+        elif len(p1) == 0:
+            print("Player 2 has won!")
+            break
+        count += 1
+        print("Player 1 Deck Size: " + str(len(p1)))
+        print("Player 2 Deck Size: " + str(len(p2)))
+        print(count)
+        currentPot = [] # Sets up an empty list at the beginning of each round for the cards that will be used in that round
+        p1Card = p1.pop(0) #These two variables grab the "top" cards from each deck
+        p2Card = p2.pop(0)
+        currentPot.extend((p1Card, p2Card))
+        winner, currentPot = compareFun(p1Card, p2Card, currentPot, p1, p2)
+        if winner == "p1":
+            for i in range(0, len(currentPot)):
+               p1.append(currentPot[i])
+        else:
+            for i in range(0, len(currentPot)):
+               p2.append(currentPot[i])
+        p1len = len(p1)
+        p2len = len(p2)
 
 playGame(p1Deck, p2Deck)
