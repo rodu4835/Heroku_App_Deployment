@@ -43,49 +43,65 @@ p1Deck, p2Deck = splitDeck(shuffledDeck)
 
 
 def compareFun(p1Card, p2Card, currentPot, p1Deck, p2Deck):
-    print("P1 Card: " + str(p1Card))
-    print("P2 Card: " + str(p2Card))
     if p1Card[1] > p2Card[1]: #if player one has the bigger card, he gets the pot
         winner = "p1"
+        return winner, currentPot
     elif p1Card[1] < p2Card[1]: #if player two has the bigger card, he gets the pot
-        winner = "p2"        
+        winner = "p2"
+        return winner, currentPot
     elif p1Card[1] == p2Card[1]: # If the cards have the samve value, draw 4 more cards and the 4th card drawn will be checked
-            try:
+            if len(p1Deck) >= 5 and len(p2Deck) >= 5:
+                print("This list is longer than 4. It's length is: " + str(len(p1Deck)))
+                print("This list is longer than 4. It's length is: " + str(len(p2Deck)))
                 for i in range(0, 3):
                     currentPot.append(p1Deck.pop(0))
                     currentPot.append(p2Deck.pop(0))
+                p1Card2 = p1Deck.pop(0)
+                p2Card2 = p2Deck.pop(0)
+                currentPot.extend((p1Card2, p2Card2))
+                winner, currentPot = compareFun(p1Card2, p2Card2, currentPot, p1Deck, p2Deck)
+            else:
+                if len(p1Deck) > len(p2Deck):
+                    shorterListLen = len(p2Deck)
+                else:
+                    shorterListLen = len(p1Deck)
+                if shorterListLen == 0: #If there is a tie and one player has no cards remaning, the other player wins
+                    if len(p1Deck) > len(p2Deck):
+                        winner = "p1"
+                    else:
+                        winner = "p2"
+                elif shorterListLen == 1:
                     p1Card2 = p1Deck.pop(0)
                     p2Card2 = p2Deck.pop(0)
                     currentPot.extend((p1Card2, p2Card2))
                     winner, currentPot = compareFun(p1Card2, p2Card2, currentPot, p1Deck, p2Deck)
-            except:
-                print("running exception")
-                if p1Card[1] > p2Card[1]:  # if player one has the bigger card, he gets the pot
-                    winner = "p1"
-                elif p1Card[1] < p2Card[1]:  # if player two has the bigger card, he gets the pot
-                    winner = "p2"
+                else:
+                    for i in range(0, shorterListLen-1):
+                        currentPot.append(p1Deck.pop(0))
+                        currentPot.append(p2Deck.pop(0))
+                    p1Card2 = p1Deck.pop(0)
+                    p2Card2 = p2Deck.pop(0)
+                    currentPot.extend((p1Card2, p2Card2))
+                    winner, currentPot = compareFun(p1Card2, p2Card2, currentPot, p1Deck, p2Deck)
     return winner, currentPot
             
 
 
 def playGame(p1, p2):
     count = 0
-    if count > 100000:
-        print("This game has ended in a draw!!!")
-        return
     p1len = len(p1)
     p2len = len(p2)
     while p1len != 0 or p2len != 0: # established the endgame rules for War, where one player needs the whole deck to win
+        if count >= 10000:
+            print("This game has ended in a draw!!!")
+            return
         if len(p2) == 0:
-            print("Player 1 has won!")
+            print("Player 1 has won the game!")
             break
         elif len(p1) == 0:
-            print("Player 2 has won!")
+            print("Player 2 has won the game!")
             break
         count += 1
-        print("Player 1 Deck Size: " + str(len(p1)))
-        print("Player 2 Deck Size: " + str(len(p2)))
-        print(count)
         currentPot = [] # Sets up an empty list at the beginning of each round for the cards that will be used in that round
         p1Card = p1.pop(0) #These two variables grab the "top" cards from each deck
         p2Card = p2.pop(0)
@@ -93,10 +109,12 @@ def playGame(p1, p2):
         winner, currentPot = compareFun(p1Card, p2Card, currentPot, p1, p2)
         if winner == "p1":
             for i in range(0, len(currentPot)):
-               p1.append(currentPot[i])
+                p1.append(currentPot[i])
+                print("Player 1 has won round " + str(count) +"!")
         else:
             for i in range(0, len(currentPot)):
-               p2.append(currentPot[i])
+                p2.append(currentPot[i])
+                print("Player 2 has won round " + str(count) +"!")
         p1len = len(p1)
         p2len = len(p2)
 
