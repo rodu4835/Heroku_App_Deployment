@@ -112,6 +112,7 @@ def playGame(p1, p2):
         p2Card = p2.pop(0)
         currentPot.extend((p1Card, p2Card)) #Puts the drawn cards into the pot
         winner, currentPot = compareFun(p1Card, p2Card, currentPot, p1, p2) #Calls the compare function on the drawn cards
+        currentPot = shuffle(currentPot) #Shuffles the winnings before added back to the hand
         if winner == "p1": #decides the winner and gives the pot to who won
             for i in range(0, len(currentPot)):
                 p1.append(currentPot[i])
