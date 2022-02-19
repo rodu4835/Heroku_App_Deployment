@@ -116,14 +116,14 @@ def playGame(p1, p2):
         if winner == "p1": #decides the winner and gives the pot to who won
             for i in range(0, len(currentPot)):
                 p1.append(currentPot[i])
-            print("Player 1 has won round " + str(count) +"!")
+            print("Player 1 has won round " + str(count) +"!  Player 1 now has " + str(len(p1)) + " cards.  Player 2 now has " + str(len(p2)) + " cards.")
         else:
             for i in range(0, len(currentPot)):
                 p2.append(currentPot[i])
-            print("Player 2 has won round " + str(count) +"!")
+            print("Player 2 has won round " + str(count) +"!  Player 1 now has " + str(len(p1)) + " cards.  Player 2 now has " + str(len(p2)) + " cards.")
         p1len = len(p1) #reasses the number of cards in each deck for the determination at the beginning of the while loop
         p2len = len(p2)
-
+        
 
 shuffledDeck = shuffle(officialDeck) #shuffles the original deck
 p1Deck, p2Deck = splitDeck(shuffledDeck)
