@@ -98,13 +98,10 @@ def playGame(p1, p2):
     p2len = len(p2)
     while p1len != 0 or p2len != 0: # established the endgame rules for War, where one player needs the whole deck to win
         if count >= 10000: #If the game goes for over 10000 rounds, it results in a draw
-            print("This game has ended in a draw!!!")
             return
         if len(p2) == 0: #If Player 2 has no cards remaning, player 1 has won the game
-            print("Player 1 has won the game!")
             return
         elif len(p1) == 0: #If Player 1 has no cards remaining, player 2 has won the game
-            print("Player 2 has won the game!")
             return
         count += 1 #Increments the round number
         currentPot = [] # Sets up an empty list at the beginning of each round for the cards that will be used in that round
@@ -116,11 +113,9 @@ def playGame(p1, p2):
         if winner == "p1": #decides the winner and gives the pot to who won
             for i in range(0, len(currentPot)):
                 p1.append(currentPot[i])
-            print("Player 1 has won round " + str(count) +"!  Player 1 now has " + str(len(p1)) + " cards.  Player 2 now has " + str(len(p2)) + " cards.")
         else:
             for i in range(0, len(currentPot)):
                 p2.append(currentPot[i])
-            print("Player 2 has won round " + str(count) +"!  Player 1 now has " + str(len(p1)) + " cards.  Player 2 now has " + str(len(p2)) + " cards.")
         p1len = len(p1) #reasses the number of cards in each deck for the determination at the beginning of the while loop
         p2len = len(p2)
         
