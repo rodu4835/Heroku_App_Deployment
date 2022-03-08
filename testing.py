@@ -1,5 +1,5 @@
 import unittest
-import ConsoleWarTest as cwt
+import cwt as cwt
 
 officialDeck = [
     # Hearts
@@ -51,8 +51,28 @@ class TextprocTestCase(unittest.TestCase):
         print("The checks do not exceed 1000")
 
     def test_comparison(self):
-        #Test for comparision of cards
+        # Initializing variables for test
+        p1Card, p2Card, currentPot, p1Deck, p2Deck = [0,0], [0,0], [], [], []
+        
+        # iterating through the different values of cards Ace(1) - King(13)
+        for i in range(1,14):
+            # checks to see if number is odd or even and sets the p1 or p2 card to that value
+            # This allows the check to test both case: p1Card is greater and p2Card is greater
+            if i%2==1:
+                p1Card[1] = i
+            else:
+                p2Card[1] = i
+            
+            # running the compareFun function with the set values for p1Card and p2Card, plus the empty place holding variables
+            result = cwt.compareFun(p1Card, p2Card, currentPot, p1Deck, p2Deck)
+            
+            # Asserts that the result is p1 when p1Card is infact greater or the opposite when p2Card is greater
+            if p1Card[1] > p2Card[1]:
+                self.assertEqual(result[0], 'p1')
+            else:
+                self.assertEqual(result[0], 'p2')
 
+    
 # Main: Run Test Cases
 if __name__ == '__main__':
     unittest.main()
