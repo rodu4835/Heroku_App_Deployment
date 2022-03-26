@@ -1,8 +1,0 @@
-#!/mnt/c/Users/Rodu/Documents/School/2022_SPRING/3308_softwareDevelopment/gitRepo/Team3/flaskTesting/venv/bin/python3
-# -*- coding: utf-8 -*-
-import re
-import sys
-from setuptools.command.easy_install import main
-if __name__ == '__main__':
-    sys.argv[0] = re.sub(r'(-script\.pyw|\.exe)?$', '', sys.argv[0])
-    sys.exit(main())
