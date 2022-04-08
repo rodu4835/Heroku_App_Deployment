@@ -1,4 +1,6 @@
 import random
+import time      #importing time to create a time delay for slow, medium, and fast modes
+
 #This is the protoype of the war game to run on console. - JS
 
 # Below, I started the deck. I figured the best way to program it would be a list of tuples, with the key being the card designation
@@ -103,7 +105,30 @@ def playGame(p1, p2):
         player1name = "Player 1"
     if player2name == "": #if the user does not enter a name for the second prompt, it reverts to "Player 2"
         player2name = "Player 2"
+    
+    
+    #This prompts the user to select a game speed.  The default is Fast Mode, so if the user enters anything other than '2' for Medium Mode or '3' for Slow Mode it runs in Fast Mode
+    
+    userSpeed = input("What game speed would you like to play?  Enter '1' for Fast Mode, '2' for Medium Mode, or '3' for Slow Mode. Remember, the game of 'War' can have hundreds of rounds!\n") 
+    if userSpeed == "2":      
+        print("You have selected Medium Mode. Good luck!")
+        gameSpeed = 0.1
+    elif userSpeed == "3":
+        print("You have selected Slow Mode. Good luck!")
+        gameSpeed = 0.2
+    else:
+        print("Your game will use Fast Mode. Good luck!")
+        gameSpeed = 0
+    time.sleep(1)    #adding a delay before the game starts for the user to read the print lines
         
+    print(f"Get ready {player1name} and {player2name}. Your game starts in 3 seconds!")  #building in a little delay and countdown timer before the game runs, even in fast mode
+    for i in range (3, 0 , -1):
+        print(f"{i}")
+        time.sleep(1)
+    
+    
+    #TODO - create a bailout option within the while loop to switch to Fast Mode if the game is too slow for the user
+
     while p1len != 0 or p2len != 0: # established the endgame rules for War, where one player needs the whole deck to win
         if count >= 10000: #If the game goes for over 10000 rounds, it results in a draw
             print("This game has ended in a draw!!!")
@@ -131,6 +156,7 @@ def playGame(p1, p2):
             print(f"{player2name} has won round " + str(count) + f"!  {player1name} now has " + str(len(p1)) + f" cards.  {player2name} now has " + str(len(p2)) + " cards.")
         p1len = len(p1) #reasses the number of cards in each deck for the determination at the beginning of the while loop
         p2len = len(p2)
+        time.sleep(gameSpeed)
         
 
 shuffledDeck = shuffle(officialDeck) #shuffles the original deck
