@@ -35,6 +35,64 @@ function splitDecks(deck) {
     return [deckOne, deckTwo];
 };
 
+function compareFunc(p1Card, p2Card, currentPot, p1Deck, p2Deck) {
+    if (p1Card[1] > p2Card[1]) {
+        var winner = "p1";
+        return [winner, currentPot];
+    } else if (p1Card[1] < p2Card[1]) {
+        var winner = "p2";
+        return [winner, currentPot];
+    } else if (p1Card[1] == p2Card[1]) {
+        if (p1Deck.length >= 5 && p2Deck.length >= 5){
+            for (i = 0; i < 3; i++) {
+                currentPot.push(p1Deck.splice(0,1));
+                currentPot.push(p2Deck.splice(0,1));
+            }
+            var p1Card2 = p1Deck.slice(0,1);
+            var p2Card2 = p2Deck.slice(0,1);
+            currentPot.push(p1Card2);
+            currentPot.push(p2Card2);
+            var result = compareFunc(p1Card2, p2Card2, currentPot, p1Deck, p2Deck);
+        } else {
+            if (p1Deck.length > p2Deck.length) {
+                var shorterListLen = p2Deck.length;
+            } else {
+                var shorterListLen = p1Deck.length;
+            }
+            if (shorterListLen == 0) {
+                if (p1Deck.length > p2Deck.length) {
+                    var winner = "p1";
+                } else {
+                    var winner = "p2";
+                }
+            } else if (shorterListLen == 1) {
+                var p1Card2 = p1Deck.slice(0,1);
+                var p2Card2 = p2Deck.slice(0,1);
+                currentPot.push(p1Card2);
+                currentPot.push(p2Card2);
+                var result = compareFunc(p1Card2, p2Card2, currentPot, p1Deck, p2Deck);
+            } else {
+                for (i = 0; i < (shorterListLen-1); i++) {
+                    currentPot.push(p1Deck.splice(0,1));
+                    currentPot.push(p2Deck.splice(0,1));
+                }
+                var p1Card2 = p1Deck.slice(0,1);
+                var p2Card2 = p2Deck.slice(0,1);
+                currentPot.push(p1Card2);
+                currentPot.push(p2Card2);
+                var result = compareFunc(p1Card2, p2Card2, currentPot, p1Deck, p2Deck);
+            }
+        }
+    }
+    var winner = result[0]
+    var currentPot = result[1]
+    return [winner, currentPot]
+}
+
+
+
+
+
 const shuffDeck = shuffleDeck(officialDeck)
 const sDecks = splitDecks(shuffDeck)
 var playerOneDeck = sDecks[0]
