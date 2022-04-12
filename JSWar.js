@@ -36,13 +36,15 @@ function splitDecks(deck) {
 };
 
 function compareFunc(p1Card, p2Card, currentPot, p1Deck, p2Deck) {
-    if (p1Card[1] > p2Card[1]) {
+    var p1FuncCard = p1Card[0][1]
+    var p2FuncCard = p2Card[0][1]
+    if (p1FuncCard > p2FuncCard) {
         var winner = "p1";
         return [winner, currentPot];
-    } else if (p1Card[1] < p2Card[1]) {
+    } else if (p1FuncCard < p2FuncCard) {
         var winner = "p2";
         return [winner, currentPot];
-    } else if (p1Card[1] == p2Card[1]) {
+    } else if (p1FuncCard == p2FuncCard) {
         if (p1Deck.length >= 5 && p2Deck.length >= 5){
             for (i = 0; i < 3; i++) {
                 currentPot.push(p1Deck.splice(0,1));
@@ -62,12 +64,14 @@ function compareFunc(p1Card, p2Card, currentPot, p1Deck, p2Deck) {
             if (shorterListLen == 0) {
                 if (p1Deck.length > p2Deck.length) {
                     var winner = "p1";
+                    return [winner, currentPot]
                 } else {
                     var winner = "p2";
+                    return [winner, currentPot]
                 }
             } else if (shorterListLen == 1) {
-                var p1Card2 = p1Deck.slice(0,1);
-                var p2Card2 = p2Deck.slice(0,1);
+                var p1Card2 = p1Deck[0];
+                var p2Card2 = p2Deck[0];
                 currentPot.push(p1Card2);
                 currentPot.push(p2Card2);
                 var result = compareFunc(p1Card2, p2Card2, currentPot, p1Deck, p2Deck);
@@ -84,13 +88,52 @@ function compareFunc(p1Card, p2Card, currentPot, p1Deck, p2Deck) {
             }
         }
     }
-    var winner = result[0]
-    var currentPot = result[1]
-    return [winner, currentPot]
+    var winner = result[0];
+    var currentPot = result[1];
+    return [winner, currentPot];
 }
 
-
-
+function playGame(p1Deck, p2Deck) {
+    var count = 0;
+    var p1Len = p1Deck.length;
+    var p2Len = p2Deck.length;
+    //Skipping doing the player names for now. Am going to figure this part out w/ the html.
+    //Same thing with the game speed section.
+    while (p1Deck.length != 0 || p2Deck.length != 0) {
+        if (count >= 1000) {
+            console.log("This game has ended in a draw!!!");
+            return;
+        }
+        if (p2Deck.length == 0) {
+            console.log("Player One has won the game!!!");
+            return;
+        } else if (p1Deck.length == 0) {
+            console.log("Player Two has won the game!!!");
+            return;
+        }
+        count = count + 1;
+        var currentPot = [];
+        var p1Card = p1Deck.slice(0, 1);
+        p1Deck = p1Deck.slice(1, (p1Deck.length));
+        var p2Card = p2Deck.slice(0, 1);
+        p2Deck = p2Deck.slice(1, (p2Deck.length));
+        currentPot.push(p1Card);
+        currentPot.push(p2Card);
+        var result = compareFunc(p1Card, p2Card, currentPot, p1Deck, p2Deck);
+        var winner = result[0];
+        currentPot = result[1];
+        currentPot = shuffleDeck(currentPot);
+        if (winner == "p1") {
+            for (i = 0; i < currentPot.length; i++) {
+                p1Deck.push(currentPot[i]);
+            }
+        } else {
+            for (i = 0; i < currentPot.length; i++) {
+                p2Deck.push(currentPot[i]);
+            }
+        }
+    }
+}
 
 
 const shuffDeck = shuffleDeck(officialDeck)
@@ -98,9 +141,4 @@ const sDecks = splitDecks(shuffDeck)
 var playerOneDeck = sDecks[0]
 var playerTwoDeck = sDecks[1]
 
-for (i = 0; i < playerOneDeck.length; i++) {
-    console.log(i + " - " +  playerOneDeck[i]);
-    console.log(i + " - " + playerTwoDeck[i])
-}
-console.log(playerOneDeck.length);
-
+playGame(playerOneDeck, playerTwoDeck);
