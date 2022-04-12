@@ -40,18 +40,24 @@ function compareFunc(p1Card, p2Card, currentPot, p1Deck, p2Deck) {
     var p2FuncCard = p2Card[0][1]
     if (p1FuncCard > p2FuncCard) {
         var winner = "p1";
-        return [winner, currentPot];
+        return [winner, currentPot, p1Deck, p2Deck];
     } else if (p1FuncCard < p2FuncCard) {
         var winner = "p2";
-        return [winner, currentPot];
+        return [winner, currentPot, p1Deck, p2Deck];
     } else if (p1FuncCard == p2FuncCard) {
         if (p1Deck.length >= 5 && p2Deck.length >= 5){
             for (i = 0; i < 3; i++) {
                 currentPot.push(p1Deck.splice(0,1));
                 currentPot.push(p2Deck.splice(0,1));
             }
+            var test1 = p1Deck.length
+            var test2 = p2Deck.length
             var p1Card2 = p1Deck.slice(0,1);
             var p2Card2 = p2Deck.slice(0,1);
+            var test1 = p1Deck.length
+            var test2 = p2Deck.length
+            p1Deck = p1Deck.slice(1, (p1Deck.length));
+            p2Deck = p2Deck.slice(1, (p2Deck.length));
             currentPot.push(p1Card2);
             currentPot.push(p2Card2);
             var result = compareFunc(p1Card2, p2Card2, currentPot, p1Deck, p2Deck);
@@ -64,10 +70,10 @@ function compareFunc(p1Card, p2Card, currentPot, p1Deck, p2Deck) {
             if (shorterListLen == 0) {
                 if (p1Deck.length > p2Deck.length) {
                     var winner = "p1";
-                    return [winner, currentPot]
+                    return [winner, currentPot, p1Deck, p2Deck]
                 } else {
                     var winner = "p2";
-                    return [winner, currentPot]
+                    return [winner, currentPot, p1Deck, p2Deck]
                 }
             } else if (shorterListLen == 1) {
                 var p1Card2 = p1Deck[0];
@@ -90,13 +96,14 @@ function compareFunc(p1Card, p2Card, currentPot, p1Deck, p2Deck) {
     }
     var winner = result[0];
     var currentPot = result[1];
-    return [winner, currentPot];
+    var finalP1Deck = result[2];
+    var finalP2Deck = result[3];
+    return [winner, currentPot, finalP1Deck, finalP2Deck];
 }
 
 function playGame(p1Deck, p2Deck) {
     var count = 0;
-    var p1Len = p1Deck.length;
-    var p2Len = p2Deck.length;
+
     //Skipping doing the player names for now. Am going to figure this part out w/ the html.
     //Same thing with the game speed section.
     while (p1Deck.length != 0 || p2Deck.length != 0) {
@@ -122,7 +129,9 @@ function playGame(p1Deck, p2Deck) {
         var result = compareFunc(p1Card, p2Card, currentPot, p1Deck, p2Deck);
         var winner = result[0];
         currentPot = result[1];
-        currentPot = shuffleDeck(currentPot);
+        p1Deck = result[2];
+        p2Deck = result[3];
+        //currentPot = shuffleDeck(currentPot);
         if (winner == "p1") {
             for (i = 0; i < currentPot.length; i++) {
                 p1Deck.push(currentPot[i]);
