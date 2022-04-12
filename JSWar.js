@@ -76,13 +76,15 @@ function compareFunc(p1Card, p2Card, currentPot, p1Deck, p2Deck) {
                     return [winner, currentPot, p1Deck, p2Deck]
                 }
             } else if (shorterListLen == 1) {
-                var p1Card2 = p1Deck[0];
-                var p2Card2 = p2Deck[0];
+                var p1Card2 = p1Deck.slice(0,1);
+                var p2Card2 = p2Deck.slice(0,1);
                 currentPot.push(p1Card2);
                 currentPot.push(p2Card2);
+                p1Deck = p1Deck.slice(1, p1Deck.length)
+                p2Deck = p2Deck.slice(1, p2Deck.length)
                 var result = compareFunc(p1Card2, p2Card2, currentPot, p1Deck, p2Deck);
             } else {
-                for (i = 0; i < (shorterListLen-1); i++) {
+                for (i = 0; i < shorterListLen-1; i++) {
                     currentPot.push(p1Deck.splice(0,1));
                     currentPot.push(p2Deck.splice(0,1));
                 }
