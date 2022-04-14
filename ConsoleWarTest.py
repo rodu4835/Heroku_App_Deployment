@@ -1,6 +1,4 @@
 import random
-import time      #importing time to create a time delay for slow, medium, and fast modes
-
 #This is the protoype of the war game to run on console. - JS
 
 # Below, I started the deck. I figured the best way to program it would be a list of tuples, with the key being the card designation
@@ -98,47 +96,12 @@ def playGame(p1, p2):
     count = 0 #This counter tracks the number of rounds
     p1len = len(p1)  #Establishes the deck length variables
     p2len = len(p2)
-    
-    player1name = input("Please enter a name for Player 1:\n") #allowing the user to input player names
-    player2name = input("Please enter a name for Player 2:\n") 
-    if player1name == "": #if the user does not enter a name for the first prompt, it reverts to "Player 1"
-        player1name = "Player 1"
-    if player2name == "": #if the user does not enter a name for the second prompt, it reverts to "Player 2"
-        player2name = "Player 2"
-    
-    
-    #This prompts the user to select a game speed.  The default is Fast Mode, so if the user enters anything other than '2' for Medium Mode or '3' for Slow Mode it runs in Fast Mode
-    
-    userSpeed = input("What game speed would you like to play?  Enter '1' for Fast Mode, '2' for Medium Mode, or '3' for Slow Mode. Remember, the game of 'War' can have hundreds of rounds!\n") 
-    print("")
-    if userSpeed == "2":      
-        print("You have selected Medium Mode. Good luck!\n")
-        gameSpeed = 0.5
-    elif userSpeed == "3":
-        print("You have selected Slow Mode. Good luck!\n")
-        gameSpeed = 1
-    else:
-        print("Your game will use Fast Mode. Good luck!\n")
-        gameSpeed = 0
-    time.sleep(1)    #adding a delay before the game starts for the user to read the print lines
-        
-    print(f"Get ready {player1name} and {player2name}. Your game starts in 3 seconds!")  #building in a little delay and countdown timer before the game runs, even in fast mode
-    for i in range (3, 0 , -1):
-        print(f"{i}")
-        time.sleep(1)
-    
-    
-    #TODO - create a bailout option within the while loop to switch to Fast Mode if the game is too slow for the user
-
     while p1len != 0 or p2len != 0: # established the endgame rules for War, where one player needs the whole deck to win
         if count >= 10000: #If the game goes for over 10000 rounds, it results in a draw
-            print("This game has ended in a draw!!!")
             return
         if len(p2) == 0: #If Player 2 has no cards remaning, player 1 has won the game
-            print(f"{player1name} has won the game!")
             return
         elif len(p1) == 0: #If Player 1 has no cards remaining, player 2 has won the game
-            print(f"{player2name} has won the game!")
             return
         count += 1 #Increments the round number
         currentPot = [] # Sets up an empty list at the beginning of each round for the cards that will be used in that round
@@ -150,22 +113,13 @@ def playGame(p1, p2):
         if winner == "p1": #decides the winner and gives the pot to who won
             for i in range(0, len(currentPot)):
                 p1.append(currentPot[i])
-            print(f"{player1name} has won round " + str(count) + f"!  {player1name} now has " + str(len(p1)) + f" cards.  {player2name} now has " + str(len(p2)) + " cards.")
         else:
             for i in range(0, len(currentPot)):
                 p2.append(currentPot[i])
-            print(f"{player2name} has won round " + str(count) + f"!  {player1name} now has " + str(len(p1)) + f" cards.  {player2name} now has " + str(len(p2)) + " cards.")
         p1len = len(p1) #reasses the number of cards in each deck for the determination at the beginning of the while loop
         p2len = len(p2)
+        
 
-        #where both players still have cards and gameSpeed is not already set to fast, check in with the user after a certain number of rounds (here 25) to see if they want to fast-forward
-        if p1len != 0 and p2len != 0 and gameSpeed != 0 and count % 25 == 0: 
-            fastForward = input("Enter 'y' if you would like to fastforward to the end.\n") #asking the user whether to fast forward the gameSpeed
-            if fastForward == "y":
-                gameSpeed = 0 #if user enters 'y', this changes gameSpeed to 0 and results in fast forward. Any other input leaves gameSpeed as is                       
-        
-        time.sleep(gameSpeed) #apply current gameSpeed to establish delay in seconds before the next round starts
-        
 shuffledDeck = shuffle(officialDeck) #shuffles the original deck
 p1Deck, p2Deck = splitDeck(shuffledDeck)
 playGame(p1Deck, p2Deck)
