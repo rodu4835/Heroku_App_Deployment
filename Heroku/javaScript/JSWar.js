@@ -38,11 +38,9 @@ function splitDecks(deck) {
 
 function compareFunc(p1Card, p2Card, currentPot, p1Deck, p2Deck) {
     var p1FuncCard = p1Card[0][1]
-	document.getElementById('p1CurrentCard').src=assignImageLocation(p1Card);
-	document.getElementById('p1CardName').innerHTML = assignImageName(p1Card);
+	assignCardInfo(p1Card, 'p1');
     var p2FuncCard = p2Card[0][1]
-	document.getElementById('p2CurrentCard').src=assignImageLocation(p2Card);
-	document.getElementById('p2CardName').innerHTML = assignImageName(p2Card);
+	assignCardInfo(p2Card, 'p2');
     if (p1FuncCard > p2FuncCard) {
         var winner = "p1";
         return [winner, currentPot, p1Deck, p2Deck];
@@ -165,22 +163,34 @@ function playGame(p1Deck, p2Deck) {
 }
 
 function setupGame() {
-	
 	var officialDeck = createOfficialDeck();
 	var shuffDeck = shuffleDeck(officialDeck);
 	var sDecks = splitDecks(shuffDeck);
-	var playerOneDeck = sDecks[0];
+	var playerOneDeck = sDecks[0];	
 	var playerTwoDeck = sDecks[1];
+	assignDeckImageLocation(playerOneDeck);
+	assignDeckImageLocation(playerTwoDeck);
 	playGame(playerOneDeck, playerTwoDeck);
 }
 
-function assignImageLocation(card){
+// FRONT END FUNCTIONS
+
+// Gives card name and image to player hand div container
+function assignCardInfo(card, id){
+	document.getElementById(id + 'Hand').style.visibility = 'visible';
+	document.getElementById(id + 'CurrentCard').src=assignCardImageLocation(card);
+	document.getElementById(id + 'CardName').innerHTML = assignCardImageName(card);
+}
+
+// Gives card image file location
+function assignCardImageLocation(card){
 	var cardName = card[0][0];
 	var cardImageLocation = './static/images/' + cardName + '.jpg';
 	return cardImageLocation;
 }
-		
-function assignImageName(card){
+
+// Gives card image name		
+function assignCardImageName(card){
 	var cardName = card[0][0];
 	var cardValue = card[0][1];
 	var suit = cardName[cardName.length - 1];
@@ -213,6 +223,29 @@ function assignImageName(card){
 	return imageName;
 }
 
+// Gives deck image file location -- yet to implement
+function assignDeckImageLocation(deck){
+	var deckSize = Object.keys(deck).length;
+	var filePath = './static/images/';
+	if (deckSize == 0) {
+		filePath = filePath + 'emptyDeck.jpg';
+	} else if ((deckSize >= 1) && (deckSize <= 9)){
+		filePath = filePath + 'deck1-9.jpg';
+	} else if ((deckSize >= 10) && (deckSize <= 18)){
+		filePath = filePath + 'deck10-18.jpg';
+	} else if ((deckSize >= 19) && (deckSize <= 27)){
+		filePath = filePath + 'deck19-27.jpg';
+	} else if ((deckSize >= 28) && (deckSize <= 36)){
+		filePath = filePath + 'deck28-36.jpg';
+	} else if ((deckSize >= 37) && (deckSize <= 45)){
+		filePath = filePath + 'deck37-45.jpg';
+	} else {
+		filePath = filePath + 'deck46-54.jpg';
+	}
+	return filePath	
+}
+
+// Chages display of game control buttons
 function alterPlayButtons(){
 	document.getElementById('playButton').style.visibility = 'hidden';
 	document.getElementById('nextButton').style.visibility = 'visible';
@@ -221,13 +254,7 @@ function alterPlayButtons(){
 
 
 document.getElementById('p1DeckImage').src='./static/images/deck46-54.jpg';
-//document.getElementById('p1CurrentCard').src='./static/images/10-H.jpg';
-
 document.getElementById('p2DeckImage').src='./static/images/deck46-54.jpg';
-//document.getElementById('p2CurrentCard').src='./static/images/5-D.jpg';
-
-//document.getElementById('p1CardCount').innerHTML = 'Full Deck';
-//document.getElementById('p2CardCount').innerHTML = 'Full Deck';
 
 
 //function createPlayerNames() {
@@ -252,10 +279,7 @@ document.querySelector('#about')
 
 document.querySelector('#playButton')
 	.addEventListener('click', function(){
-	//assignImageLocation();
 	alterPlayButtons();
-	document.getElementById('p1Hand').style.visibility = 'visible';
-	document.getElementById('p2Hand').style.visibility = 'visible';
 	setupGame();
 });
 
