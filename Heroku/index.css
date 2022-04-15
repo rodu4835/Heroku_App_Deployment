@@ -1,35 +1,87 @@
-/* the css rules for index.html  */
-
 body {
-	background-color: #333333;
+	background-color: #9999ff;
 	font-family: "Lucida Console", "Courier New", monospace;
 	text-align: center;
 }
-
-div {
-	margin-top: 5px;
-	margin-bottom: 5px;
-	margin-right: 5px;
-	padding: 10px;
+.button{
+  	background-color: #8f8f8f;
+  	border: 2px solid #000000;
+  	color: white;
+  	padding: 15px 32px;
+	border-color: #000000;
+  	text-align: center;
+  	text-decoration: none;
+  	display: inline-block;
+ 	font-size: 16px;
+	font-family: "Lucida Console", "Courier New", monospace;
+	border-radius: 8px;
 }
 
-#jumbotron {
-	background: #532f8c;
-	color: white;
-	padding-bottom: 80px
+#playerNameTextBox{
+	background-color: #8f8f8f;
+  	border: 2px solid #000000;
+  	color: white;
+  	padding: 15px 32px;
+	border-color: #000000;
+  	text-align: center;
+  	text-decoration: none;
+  	display: inline-block;
+ 	font-size: 16px;
+	font-family: "Lucida Console", "Courier New", monospace;
+	border-radius: 8px;
 }
-#jumbotron btn-primary {
-	background: #845ac7;
-	border-color: #845ac7
+
+.cardInfo{
+	background-color: #8f8f8f;
+  	color: white;
+  	padding: 15px 32px;
+	border-color: #000000;
+  	text-align: center;
+  	text-decoration: none;
+  	display: block;
+ 	font-size: 16px;
+	font-family: "Lucida Console", "Courier New", monospace;
+	border-radius: 8px;
 }
-#jumbotron btn-primary:hover {
-	background: #7646c1
+
+.float-container {
+    padding: 20px;
+	height:auto%;
+	overflow:auto;
 }
-#jumbotron p {
-	color: #d9ccee;
-	max-width: 75%;
-	margin: 1em auto 2em
+
+.float-child{
+	background-color: #8f8f8f;
+	width: auto;
+	height: auto;
+    float: left;
+    padding: 10px;
+    border: 2px solid #000000;
+	border-radius: 8px;
 }
-#navbar + #jumbotron {
-	margin-top: -20px
+
+#p2CardCount{
+	transform: scaleX(-1);
+}
+#p2CardName{
+	transform: scaleX(-1);
+}
+
+.float-child2{
+	transform: scaleX(-1);
+	background-color: #8f8f8f;
+	width: auto;
+	height: auto;
+    float: right;
+    padding: 10px;
+    border: 2px solid #000000;
+	border-radius: 8px;
+}
+
+img {
+  	display: inline-block;
+	margin: auto;
+	max-height: 400px;
+	height: auto;
+	border-radius: 8px;
 }

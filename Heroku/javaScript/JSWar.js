@@ -15,9 +15,11 @@ function createOfficialDeck() {
         // Clubs
         ['A-C', 1], ['2-C', 2], ['3-C', 3], ['4-C', 4], ['5-C', 5], ['6-C', 6], ['7-C', 7], ['8-C', 8], ['9-C', 9], ['10-C', 10], ['J-C', 11],
         ['Q-C', 12], ['K-C', 13]
-        ]
+        ];
     return theDECK
 }
+
+
 
 //console.log(officialDeck [0] [0]);
 
@@ -149,8 +151,8 @@ function playGame(p1Deck, p2Deck) {
     }
 }
 
-function gameStart(){
-	var officialDeck = createOfficialDeck()
+function setupGame() {
+	var officialDeck = createOfficialDeck();
 	var shuffDeck = shuffleDeck(officialDeck);
 	var sDecks = splitDecks(shuffDeck);
 	var playerOneDeck = sDecks[0];
@@ -158,15 +160,56 @@ function gameStart(){
 	playGame(playerOneDeck, playerTwoDeck);
 }
 
+function assignImageLocation(){
+	createOfficialDeck().forEach(function(x){
+		x[2] = './static/images/' + x[0] +'.jpg';
+	});
+}
 
-//const shuffDeck = shuffleDeck(officialDeck)
-//const sDecks = splitDecks(shuffDeck)
-//var playerOneDeck = sDecks[0]
-//var playerTwoDeck = sDecks[1]
 
-//Front end functions ------------------------
+document.getElementById('p1DeckImage').src='./static/images/deck46-54.jpg';
+document.getElementById('p1CurrentCard').src='./static/images/10-H.jpg';
 
-document.querySelector('#playButton').addEventListener('click', function(){gameStart()});
+document.getElementById('p2DeckImage').src='./static/images/deck46-54.jpg';
+document.getElementById('p2CurrentCard').src='./static/images/5-D.jpg';
+
+document.getElementById('p1CardCount').innerHTML = 'Full Deck';
+document.getElementById('p1CardName').innerHTML = '10 of Hearts';
+
+document.getElementById('p2CardCount').innerHTML = 'Full Deck';
+document.getElementById('p2CardName').innerHTML = '5 of Diamonds';
+
+//function createPlayerNames() {
+//	console.log(document.getElementById('playerNameTextBox').value);
+//}
+
+
+document.querySelector('#restartGame')
+	.addEventListener('click', function(){
+	window.location=('index.html');
+});
+document.querySelector('#gitSource')
+	.addEventListener('click', function(){
+	window.open('https://github.com/rodu4835/CSPB_3308_Team_3');
+});
+document.querySelector('#about')
+	.addEventListener('click', function(){
+	window.location=('devInfo.html');
+});
+
+document.querySelector('#playButton')
+	.addEventListener('click', function(){
+	assignImageLocation();
+	console.log('image Locations Assigned - work in progress')
+});
+
+//document.querySelector('#playerNameTextBox')
+//	.addEventListener('keyup', function(){
+//	createPlayerNames();
+//});
+	
+
+
 
 
 

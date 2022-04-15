@@ -1,50 +1,65 @@
+<!-- html file for the home page -->
 <!DOCTYPE html>
 <html>
 	<head>
-	<title>Console War</title>
-		<link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" />
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-		<script type="text/javascript" src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
-		<style type="text/css" href='index.css'></style>
+	<title>Home</title>
+		<link rel='stylesheet' href='index.css'>
 	</head>
 	<body>
-		<nav class="navbar navbar-default navbar-static-top navbar-inverse">
-			<div class="container">
-				<ul class="nav navbar-nav">
-					<li class="active">
-						<a href="/"><span class="glyphicon glyphicon-home"></span> Home</a>
-					</li>
-					<li>
-						<a href="https://github.com/rodu4835/CSPB_3308_Team_3.git"><span class="glyphicon glyphicon-download"></span> Source on GitHub</a>
-					</li>
-					<li class="dropdown">
-						<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><span class="glyphicon glyphicon-info-sign"></span> Dropdown Test <span class="caret"></span></a>
-						<ul class="dropdown-menu" role="menu">
-							<li>
-								<a href="https://devcenter.heroku.com/articles/getting-started-with-ruby">Getting Started with Ruby on Heroku</a>
-							</li>
-						</ul>
-					</li>
-				</ul>
-				<ul class="nav navbar-nav navbar-right">
-					<li class="navbar-right">
-						<a id='devInfo'><span class="glyphicon glyphicon-info-sign"></span> Developer Info</a>
-					</li>
-				</ul>
+		<header>
+			<button class='button' id='restartGame'>Restart Game</button>
+			<button class='button' id='gitSource'>Source on GitHub</button>
+			<button class='button' id='about'>About</button>
+		</header>
+		<div>
+			<h1>Welcome to Console War!</h1>
+			
+			<!--
+			<div class='inputBox'>
+				<input id='playerNameTextBox' placeholder='Your Name Here' type='text'>
 			</div>
-		</nav>
-		<div class="jumbotron text-center">
-			<div class="container">
-				<h1>Welcome to Console War!</h1>
-				<p>Press Play!</p>
-				<!-- <a type="button" class="btn btn-lg btn-default"><span class="glyphicon glyphicon-step-backward"></span> Slow</a> 
-				-->
-				<a id='playButton' type="button" class="btn btn-lg btn-default"><span class="glyphicon glyphicon-flash"></span> Play</a>
-				<!--
-				<a type="button" class="btn btn-lg btn-default"><span class="glyphicon glyphicon-fast-forward"></span> Fast</a>
-				-->
+			-->
+			
+			<div class='float-container'>
+				
+				<div class='float-child'>
+					<div class='cardInfo'>
+						<div id='p1CardCount'></div>
+					</div>
+					<img id='p1DeckImage'/>
+				</div>
+				
+				<div class='float-child'>
+					<div class='cardInfo'>
+						<div id='p1CardName'></div>
+					</div>
+					<img id='p1CurrentCard'/>
+				</div>
+				
+				<div id='p1WinnerFlag'></div>
+				
+				<div class='float-child2'>
+					<div class='cardInfo'>
+						<div id='p2CardCount'></div>
+					</div>
+					<img id='p2DeckImage'/>
+				</div>
+				
+				<div class='float-child2'>
+					<div class='cardInfo'>
+						<div id='p2CardName'></div>
+					</div>
+					<img id='p2CurrentCard'/>
+				</div>
+				
+				<div id='p1WinnerFlag'></div>
+				
+			</div>
+				<div id='winningPlayer' />
+			<div>
+				<button class='button' id='playButton'>Play</button>
 			</div>
 		</div>
-		<script src="JSWar.js"></script>
+		<script src="./javaScript/JSWar.js"></script>
 	</body>
 </html>
