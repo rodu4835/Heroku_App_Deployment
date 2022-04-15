@@ -3,7 +3,7 @@ body {
 	font-family: "Lucida Console", "Courier New", monospace;
 	text-align: center;
 }
-.button{
+.buttonHeader{
   	background-color: #8f8f8f;
   	border: 2px solid #000000;
   	color: white;
@@ -16,6 +16,34 @@ body {
 	font-family: "Lucida Console", "Courier New", monospace;
 	border-radius: 8px;
 }
+
+.buttonGame{
+  	background-color: #8f8f8f;
+  	border: 2px solid #000000;
+  	color: white;
+  	padding: 15px 32px;
+	border-color: #000000;
+  	text-align: center;
+  	text-decoration: none;
+  	display: inline-block;
+ 	font-size: 16px;
+	font-family: "Lucida Console", "Courier New", monospace;
+	border-radius: 8px;
+}
+#p1Hand{
+	visibility: hidden;
+}
+#p2Hand{
+	visibility: hidden;
+}
+#nextButton{
+	visibility: hidden;
+}
+#fastForwardButton{
+	float: right;
+	visibility: hidden;
+}
+
 
 #playerNameTextBox{
 	background-color: #8f8f8f;

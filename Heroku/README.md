@@ -25,13 +25,7 @@ Files in this directory
 	- Main project files
 		index.html
 		index.css
-		devInfo.html
-		devInfo.css
-		/javaScript
-			JSWar.js
-			about.js
-		/static
-			/images
+		JSWar.js
 	- Files needed to run on Heroku
 		composer.json
 		index.php

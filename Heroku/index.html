@@ -2,14 +2,14 @@
 <!DOCTYPE html>
 <html>
 	<head>
-	<title>Home</title>
-		<link rel='stylesheet' href='index.css'>
+		<title>Home</title>
+			<link rel='stylesheet' href='index.css'/>
 	</head>
 	<body>
 		<header>
-			<button class='button' id='restartGame'>Restart Game</button>
-			<button class='button' id='gitSource'>Source on GitHub</button>
-			<button class='button' id='about'>About</button>
+			<button class='buttonHeader' id='restartGame'>Restart Game</button>
+			<button class='buttonHeader' id='gitSource'>Source on GitHub</button>
+			<button class='buttonHeader' id='about'>About</button>
 		</header>
 		<div>
 			<h1>Welcome to Console War!</h1>
@@ -19,17 +19,18 @@
 				<input id='playerNameTextBox' placeholder='Your Name Here' type='text'>
 			</div>
 			-->
-			
+			<div>
+			</div>
 			<div class='float-container'>
 				
 				<div class='float-child'>
 					<div class='cardInfo'>
-						<div id='p1CardCount'></div>
+						<div id='p1CardCount'>Full Deck</div>
 					</div>
 					<img id='p1DeckImage'/>
 				</div>
 				
-				<div class='float-child'>
+				<div class='float-child' id='p1Hand'>
 					<div class='cardInfo'>
 						<div id='p1CardName'></div>
 					</div>
@@ -40,12 +41,12 @@
 				
 				<div class='float-child2'>
 					<div class='cardInfo'>
-						<div id='p2CardCount'></div>
+						<div id='p2CardCount'>Full Deck</div>
 					</div>
 					<img id='p2DeckImage'/>
 				</div>
 				
-				<div class='float-child2'>
+				<div class='float-child2' id='p2Hand'>
 					<div class='cardInfo'>
 						<div id='p2CardName'></div>
 					</div>
@@ -55,10 +56,13 @@
 				<div id='p1WinnerFlag'></div>
 				
 			</div>
-				<div id='winningPlayer' />
+			<div id='winningPlayer'></div>
 			<div>
-				<button class='button' id='playButton'>Play</button>
+				<button class='buttonGame' id='playButton'>Play</button>
+				<button class='buttonGame' id='nextButton'>Next Round</button>
+				<button class='buttonGame' id='fastForwardButton'>Skip to End</button>
 			</div>
+			
 		</div>
 		<script src="./javaScript/JSWar.js"></script>
 	</body>

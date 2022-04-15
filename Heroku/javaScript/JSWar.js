@@ -19,10 +19,6 @@ function createOfficialDeck() {
     return theDECK
 }
 
-
-
-//console.log(officialDeck [0] [0]);
-
 function shuffleDeck(deck) {
     var funcDeck = deck;
     var shuffledDeck = [];
@@ -42,7 +38,11 @@ function splitDecks(deck) {
 
 function compareFunc(p1Card, p2Card, currentPot, p1Deck, p2Deck) {
     var p1FuncCard = p1Card[0][1]
+	document.getElementById('p1CurrentCard').src=assignImageLocation(p1Card);
+	document.getElementById('p1CardName').innerHTML = assignImageName(p1Card);
     var p2FuncCard = p2Card[0][1]
+	document.getElementById('p2CurrentCard').src=assignImageLocation(p2Card);
+	document.getElementById('p2CardName').innerHTML = assignImageName(p2Card);
     if (p1FuncCard > p2FuncCard) {
         var winner = "p1";
         return [winner, currentPot, p1Deck, p2Deck];
@@ -108,6 +108,11 @@ function compareFunc(p1Card, p2Card, currentPot, p1Deck, p2Deck) {
     return [winner, currentPot, finalP1Deck, finalP2Deck];
 }
 
+function slowPlay(p1Deck, p2Deck){
+		
+}
+
+
 function playGame(p1Deck, p2Deck) {
     var count = 0;
 
@@ -125,19 +130,27 @@ function playGame(p1Deck, p2Deck) {
             console.log("Player Two has won the game!!!");
             return;
         }
+		
         count = count + 1;
+		
         var currentPot = [];
         var p1Card = p1Deck.slice(0, 1);
         p1Deck = p1Deck.slice(1, (p1Deck.length));
+		
         var p2Card = p2Deck.slice(0, 1);
         p2Deck = p2Deck.slice(1, (p2Deck.length));
+		
         currentPot.push(p1Card);
         currentPot.push(p2Card);
+		
         var result = compareFunc(p1Card, p2Card, currentPot, p1Deck, p2Deck);
         var winner = result[0];
+		
         currentPot = result[1];
+		
         p1Deck = result[2];
         p2Deck = result[3];
+		
         //currentPot = shuffleDeck(currentPot);
         if (winner == "p1") {
             for (i = 0; i < currentPot.length; i++) {
@@ -152,6 +165,7 @@ function playGame(p1Deck, p2Deck) {
 }
 
 function setupGame() {
+	
 	var officialDeck = createOfficialDeck();
 	var shuffDeck = shuffleDeck(officialDeck);
 	var sDecks = splitDecks(shuffDeck);
@@ -160,24 +174,61 @@ function setupGame() {
 	playGame(playerOneDeck, playerTwoDeck);
 }
 
-function assignImageLocation(){
-	createOfficialDeck().forEach(function(x){
-		x[2] = './static/images/' + x[0] +'.jpg';
-	});
+function assignImageLocation(card){
+	var cardName = card[0][0];
+	var cardImageLocation = './static/images/' + cardName + '.jpg';
+	return cardImageLocation;
+}
+		
+function assignImageName(card){
+	var cardName = card[0][0];
+	var cardValue = card[0][1];
+	var suit = cardName[cardName.length - 1];
+	if (suit == 'C'){
+		suit = 'Clubs';
+	} else if (suit == 'D'){
+		suit = 'Diamonds';
+	} else if (suit == 'H'){
+		suit = 'Hearts';
+	} else if (suit == 'S'){
+		suit = 'Spades';
+	} else {
+		suit = 'Error: No card suit detected.';
+	}
+	
+	if ((cardValue > 1) && (cardValue < 11)){
+		cardValue = cardValue.toString();
+	} else if (cardValue == 1){
+		cardValue = 'Ace';
+	} else if (cardValue == 11){
+		cardValue = 'Jack';
+	} else if (cardValue == 12){
+		cardValue = 'Queen';
+	} else if (cardValue == 13){
+		cardValue = 'King';
+	} else {
+		cardValue = 'Error: No card value detected.';
+	}
+	var imageName = cardValue + ' of ' + suit;
+	return imageName;
+}
+
+function alterPlayButtons(){
+	document.getElementById('playButton').style.visibility = 'hidden';
+	document.getElementById('nextButton').style.visibility = 'visible';
+	document.getElementById('fastForwardButton').style.visibility = 'visible';
 }
 
 
 document.getElementById('p1DeckImage').src='./static/images/deck46-54.jpg';
-document.getElementById('p1CurrentCard').src='./static/images/10-H.jpg';
+//document.getElementById('p1CurrentCard').src='./static/images/10-H.jpg';
 
 document.getElementById('p2DeckImage').src='./static/images/deck46-54.jpg';
-document.getElementById('p2CurrentCard').src='./static/images/5-D.jpg';
+//document.getElementById('p2CurrentCard').src='./static/images/5-D.jpg';
 
-document.getElementById('p1CardCount').innerHTML = 'Full Deck';
-document.getElementById('p1CardName').innerHTML = '10 of Hearts';
+//document.getElementById('p1CardCount').innerHTML = 'Full Deck';
+//document.getElementById('p2CardCount').innerHTML = 'Full Deck';
 
-document.getElementById('p2CardCount').innerHTML = 'Full Deck';
-document.getElementById('p2CardName').innerHTML = '5 of Diamonds';
 
 //function createPlayerNames() {
 //	console.log(document.getElementById('playerNameTextBox').value);
@@ -187,6 +238,8 @@ document.getElementById('p2CardName').innerHTML = '5 of Diamonds';
 document.querySelector('#restartGame')
 	.addEventListener('click', function(){
 	window.location=('index.html');
+	document.getElementById('p1Hand').style.visibility = 'hidden';
+	document.getElementById('p2Hand').style.visibility = 'hidden';
 });
 document.querySelector('#gitSource')
 	.addEventListener('click', function(){
@@ -199,8 +252,11 @@ document.querySelector('#about')
 
 document.querySelector('#playButton')
 	.addEventListener('click', function(){
-	assignImageLocation();
-	console.log('image Locations Assigned - work in progress')
+	//assignImageLocation();
+	alterPlayButtons();
+	document.getElementById('p1Hand').style.visibility = 'visible';
+	document.getElementById('p2Hand').style.visibility = 'visible';
+	setupGame();
 });
 
 //document.querySelector('#playerNameTextBox')
