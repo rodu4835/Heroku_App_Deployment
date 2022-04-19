@@ -43,6 +43,35 @@ body {
 	float: right;
 	visibility: hidden;
 }
+#p1DeckDiv{
+	visibility: hidden;
+}
+#p2DeckDiv{
+	visibility: hidden;
+}
+#winningPlayer{
+	visibility: hidden;
+}
+#p1WinnerFlag{
+	background-color: #8f8f8f;
+	width: auto;
+	height: auto;
+    float: left;
+    padding: 10px;
+    border: 2px solid #000000;
+	border-radius: 8px;
+	visibility: hidden;
+}
+#p2WinnerFlag{
+	background-color: #8f8f8f;
+	width: auto;
+	height: auto;
+    float: right;
+    padding: 10px;
+    border: 2px solid #000000;
+	border-radius: 8px;
+	visibility: hidden;
+}
 
 
 #playerNameTextBox{
@@ -73,7 +102,7 @@ body {
 }
 
 .float-container {
-    padding: 20px;
+    padding: 0px;
 	height:auto%;
 	overflow:auto;
 }

@@ -38,9 +38,7 @@ function splitDecks(deck) {
 
 function compareFunc(p1Card, p2Card, currentPot, p1Deck, p2Deck) {
     var p1FuncCard = p1Card[0][1]
-	assignCardInfo(p1Card, 'p1');
     var p2FuncCard = p2Card[0][1]
-	assignCardInfo(p2Card, 'p2');
     if (p1FuncCard > p2FuncCard) {
         var winner = "p1";
         return [winner, currentPot, p1Deck, p2Deck];
@@ -106,32 +104,23 @@ function compareFunc(p1Card, p2Card, currentPot, p1Deck, p2Deck) {
     return [winner, currentPot, finalP1Deck, finalP2Deck];
 }
 
-function slowPlay(p1Deck, p2Deck){
-		
-}
-
-
 function playGame(p1Deck, p2Deck) {
     var count = 0;
-
-    //Skipping doing the player names for now. Am going to figure this part out w/ the html.
-    //Same thing with the game speed section.
     while (p1Deck.length != 0 || p2Deck.length != 0) {
         if (count >= 5000) {
-            console.log("This game has ended in a draw!!!");
+            displayGameWinner('tie');
             return;
         }
         if (p2Deck.length == 0) {
-            console.log("Player One has won the game!!!");
+            displayGameWinner('p1');
             return;
         } else if (p1Deck.length == 0) {
-            console.log("Player Two has won the game!!!");
+            displayGameWinner('p2');
             return;
         }
-		
         count = count + 1;
-		
         var currentPot = [];
+		
         var p1Card = p1Deck.slice(0, 1);
         p1Deck = p1Deck.slice(1, (p1Deck.length));
 		
@@ -142,10 +131,9 @@ function playGame(p1Deck, p2Deck) {
         currentPot.push(p2Card);
 		
         var result = compareFunc(p1Card, p2Card, currentPot, p1Deck, p2Deck);
+
         var winner = result[0];
-		
         currentPot = result[1];
-		
         p1Deck = result[2];
         p2Deck = result[3];
 		
@@ -159,7 +147,13 @@ function playGame(p1Deck, p2Deck) {
                 p2Deck.push(currentPot[i][0]);
             }
         }
+		loadGameResults(p1Card, p1Deck, p2Card, p2Deck, winner);
     }
+}
+
+const gameResults = [];
+function loadGameResults(p1Card, p1Deck, p2Card, p2Deck, winner) {
+	gameResults.push([p1Card, p1Deck, p2Card, p2Deck, winner]);
 }
 
 function setupGame() {
@@ -168,12 +162,25 @@ function setupGame() {
 	var sDecks = splitDecks(shuffDeck);
 	var playerOneDeck = sDecks[0];	
 	var playerTwoDeck = sDecks[1];
-	assignDeckImageLocation(playerOneDeck);
-	assignDeckImageLocation(playerTwoDeck);
 	playGame(playerOneDeck, playerTwoDeck);
 }
 
 // FRONT END FUNCTIONS
+
+function stepThroughResults(gameResults, round){
+	displayGame(gameResults, round);
+	round = round + 1;
+	return round;
+}
+
+
+function displayGame(gameResults, round) {
+	assignCardInfo(gameResults[round][0], 'p1');
+	assignDeckInfo(gameResults[round][1], 'p1');
+	assignCardInfo(gameResults[round][2], 'p2');
+	assignDeckInfo(gameResults[round][3], 'p2');
+	displayRoundWinner(gameResults[round][4]);
+}
 
 // Gives card name and image to player hand div container
 function assignCardInfo(card, id){
@@ -223,6 +230,13 @@ function assignCardImageName(card){
 	return imageName;
 }
 
+// sets player and deck info to deck div
+function assignDeckInfo(deck, id){
+	document.getElementById(id + 'DeckDiv').style.visibility = 'visible';
+	document.getElementById(id + 'DeckImage').src=assignDeckImageLocation(deck);;
+	document.getElementById(id + 'CardCount').innerHTML = assignDeckCardCount(deck);
+}
+
 // Gives deck image file location -- yet to implement
 function assignDeckImageLocation(deck){
 	var deckSize = Object.keys(deck).length;
@@ -245,6 +259,16 @@ function assignDeckImageLocation(deck){
 	return filePath	
 }
 
+// Gives deck image name from count of cards
+function assignDeckCardCount(deck){
+	var cardsInDeck = Object.keys(deck).length;
+	if (cardsInDeck == 1){
+		return cardsInDeck + ' Card';
+	} else {
+		return cardsInDeck + ' Cards';
+	}
+}
+
 // Chages display of game control buttons
 function alterPlayButtons(){
 	document.getElementById('playButton').style.visibility = 'hidden';
@@ -252,21 +276,36 @@ function alterPlayButtons(){
 	document.getElementById('fastForwardButton').style.visibility = 'visible';
 }
 
+function displayRoundWinner(id){
+	var player = ''
+	if (id == 'p1'){
+		player = 'One';
+	} else {
+		player = 'Two';
+	}
+	console.log(id);
+	document.getElementById(id + 'WinnerFlag').style.visibility = 'visible';
+	document.getElementById(id + 'WinnerFlag').innerHTML = "Player " + player + " has won this Round!!!";
+}
 
-document.getElementById('p1DeckImage').src='./static/images/deck46-54.jpg';
-document.getElementById('p2DeckImage').src='./static/images/deck46-54.jpg';
 
+// Clears board and displays the winner
+function displayGameWinner(id){
+	if (id == 'p1'){
+		document.getElementById('winningPlayer').innerHTML = "Player One has won the game!!!";
+	} else if (id == 'p2'){
+		document.getElementById('winningPlayer').innerHTML = "Player Two has won the game!!!";
+	} else {
+		document.getElementById('winningPlayer').innerHTML = "This game has ended in a draw!!!";
+	}
+	document.getElementById('winningPlayer').style.visibility = 'visible';
+}
 
-//function createPlayerNames() {
-//	console.log(document.getElementById('playerNameTextBox').value);
-//}
 
 
 document.querySelector('#restartGame')
 	.addEventListener('click', function(){
 	window.location=('index.html');
-	document.getElementById('p1Hand').style.visibility = 'hidden';
-	document.getElementById('p2Hand').style.visibility = 'hidden';
 });
 document.querySelector('#gitSource')
 	.addEventListener('click', function(){
@@ -281,13 +320,28 @@ document.querySelector('#playButton')
 	.addEventListener('click', function(){
 	alterPlayButtons();
 	setupGame();
+	displayGame(gameResults, 0);
 });
+
+var round = 0;
+document.querySelector('#nextButton')
+	.addEventListener('click', function(){
+	document.getElementById('p1WinnerFlag').style.visibility = 'hidden';
+	document.getElementById('p2WinnerFlag').style.visibility = 'hidden';
+	round = round + 1;
+	stepThroughResults(gameResults, round);
+	
+});
+
 
 //document.querySelector('#playerNameTextBox')
 //	.addEventListener('keyup', function(){
 //	createPlayerNames();
 //});
 	
+//function createPlayerNames() {
+//	console.log(document.getElementById('playerNameTextBox').value);
+//}
 
 
 
