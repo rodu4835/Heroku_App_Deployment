@@ -50,6 +50,21 @@ body {
 	visibility: hidden;
 }
 #winningPlayer{
+	background-color: #8f8f8f;
+	color: white;
+	top: 60%;
+	right: 20%;
+	bottom: 0%;
+	left: 20%;
+	justify-content: center;
+	align-content: center;
+	width: auto;
+	margin: auto;
+	height: auto;
+	position: absolute;
+    padding: 10px;
+    border: 2px solid #000000;
+	border-radius: 8px;
 	visibility: hidden;
 }
 #p1WinnerFlag{

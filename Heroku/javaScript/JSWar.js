@@ -104,18 +104,20 @@ function compareFunc(p1Card, p2Card, currentPot, p1Deck, p2Deck) {
     return [winner, currentPot, finalP1Deck, finalP2Deck];
 }
 
+var warMaster = ''
+
 function playGame(p1Deck, p2Deck) {
     var count = 0;
     while (p1Deck.length != 0 || p2Deck.length != 0) {
         if (count >= 5000) {
-            displayGameWinner('tie');
+            warMaster = 'tie';
             return;
         }
         if (p2Deck.length == 0) {
-            displayGameWinner('p1');
+            warMaster = 'p1';
             return;
         } else if (p1Deck.length == 0) {
-            displayGameWinner('p2');
+            warMaster = 'p2';
             return;
         }
         count = count + 1;
@@ -172,7 +174,6 @@ function stepThroughResults(gameResults, round){
 	round = round + 1;
 	return round;
 }
-
 
 function displayGame(gameResults, round) {
 	assignCardInfo(gameResults[round][0], 'p1');
@@ -276,6 +277,7 @@ function alterPlayButtons(){
 	document.getElementById('fastForwardButton').style.visibility = 'visible';
 }
 
+// displays winner of each round in the winnerflag div
 function displayRoundWinner(id){
 	var player = ''
 	if (id == 'p1'){
@@ -288,6 +290,11 @@ function displayRoundWinner(id){
 	document.getElementById(id + 'WinnerFlag').innerHTML = "Player " + player + " has won this Round!!!";
 }
 
+// clears the winner flag div
+function clearRoundWinner(id){
+	document.getElementById(id + 'WinnerFlag').style.visibility = 'hidden';
+}
+
 
 // Clears board and displays the winner
 function displayGameWinner(id){
@@ -296,12 +303,10 @@ function displayGameWinner(id){
 	} else if (id == 'p2'){
 		document.getElementById('winningPlayer').innerHTML = "Player Two has won the game!!!";
 	} else {
-		document.getElementById('winningPlayer').innerHTML = "This game has ended in a draw!!!";
+		document.getElementById('winningPlayer').innerHTML = "Over 5000 rounds were played. This game has ended in a draw!!!";
 	}
 	document.getElementById('winningPlayer').style.visibility = 'visible';
 }
-
-
 
 document.querySelector('#restartGame')
 	.addEventListener('click', function(){
@@ -321,16 +326,27 @@ document.querySelector('#playButton')
 	alterPlayButtons();
 	setupGame();
 	displayGame(gameResults, 0);
+	console.dir(Object.keys(gameResults).length);
 });
 
 var round = 0;
 document.querySelector('#nextButton')
 	.addEventListener('click', function(){
-	document.getElementById('p1WinnerFlag').style.visibility = 'hidden';
-	document.getElementById('p2WinnerFlag').style.visibility = 'hidden';
+	clearRoundWinner('p1');
+	clearRoundWinner('p2');
 	round = round + 1;
 	stepThroughResults(gameResults, round);
-	
+	if (round == Object.keys(gameResults).length - 1) {
+		displayGameWinner(warMaster);
+	}
+});
+
+document.querySelector('#fastForwardButton')
+	.addEventListener('click', function(){
+	displayGameWinner(warMaster);
+	displayGame(gameResults, Object.keys(gameResults).length - 1);
+	clearRoundWinner('p1');
+	clearRoundWinner('p2');
 });
 
 
