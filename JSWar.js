@@ -1,6 +1,9 @@
 // JavaScript version of the Console War Game.
 // CU CSP
 
+//TESTING
+var mostRecentRun = "";
+
 function createOfficialDeck() {
     const theDECK = [
         // Hearts
@@ -42,13 +45,16 @@ function compareFunc(p1Card, p2Card, currentPot, p1Deck, p2Deck) {
     var p1FuncCard = p1Card[0][1]
     var p2FuncCard = p2Card[0][1]
     if (p1FuncCard > p2FuncCard) {
+        mostRecentRun = "P1 Win"
         var winner = "p1";
         return [winner, currentPot, p1Deck, p2Deck];
     } else if (p1FuncCard < p2FuncCard) {
+        mostRecentRun = "P2 Win"
         var winner = "p2";
         return [winner, currentPot, p1Deck, p2Deck];
     } else if (p1FuncCard == p2FuncCard) {
         if (p1Deck.length >= 5 && p2Deck.length >= 5){
+            mostRecentRun = "Many Card Left Tie"
             for (i = 0; i < 3; i++) {
                 currentPot.push(p1Deck.splice(0,1));
                 currentPot.push(p2Deck.splice(0,1));
@@ -71,6 +77,7 @@ function compareFunc(p1Card, p2Card, currentPot, p1Deck, p2Deck) {
                 var shorterListLen = p1Deck.length;
             }
             if (shorterListLen == 0) {
+                mostRecentRun = "0 Card Left Tie"
                 if (p1Deck.length > p2Deck.length) {
                     var winner = "p1";
                     return [winner, currentPot, p1Deck, p2Deck]
@@ -79,6 +86,8 @@ function compareFunc(p1Card, p2Card, currentPot, p1Deck, p2Deck) {
                     return [winner, currentPot, p1Deck, p2Deck]
                 }
             } else if (shorterListLen == 1) {
+                let checker = [p1Deck.length, p2Deck.length, currentPot.length]
+                mostRecentRun = "1 Card Left Tie"
                 var p1Card2 = p1Deck.slice(0,1);
                 var p2Card2 = p2Deck.slice(0,1);
                 currentPot.push(p1Card2);
@@ -87,6 +96,7 @@ function compareFunc(p1Card, p2Card, currentPot, p1Deck, p2Deck) {
                 p2Deck = p2Deck.slice(1, p2Deck.length)
                 var result = compareFunc(p1Card2, p2Card2, currentPot, p1Deck, p2Deck);
             } else {
+                mostRecentRun = "Less then 5 Card Left Tie"
                 for (i = 0; i < shorterListLen-1; i++) {
                     currentPot.push(p1Deck.splice(0,1));
                     currentPot.push(p2Deck.splice(0,1));
@@ -109,6 +119,7 @@ function compareFunc(p1Card, p2Card, currentPot, p1Deck, p2Deck) {
 function playGame(p1Deck, p2Deck) {
     var count = 0;
 
+
     //Skipping doing the player names for now. Am going to figure this part out w/ the html.
     //Same thing with the game speed section.
     while (p1Deck.length != 0 || p2Deck.length != 0) {
@@ -118,9 +129,13 @@ function playGame(p1Deck, p2Deck) {
         }
         if (p2Deck.length == 0) {
             console.log("Player One has won the game!!!");
+            console.log("Winner Card Count: " + p1Deck.length);
+            console.log("Rounds: " + count)
             return;
         } else if (p1Deck.length == 0) {
             console.log("Player Two has won the game!!!");
+            console.log("Winner Card Count: " + p2Deck.length);
+            console.log("Rounds: " + count)
             return;
         }
         count = count + 1;
@@ -146,8 +161,23 @@ function playGame(p1Deck, p2Deck) {
                 p2Deck.push(currentPot[i][0]);
             }
         }
+    if(p1Deck.length > 52 || p2Deck.length > 52 || (p1Deck.length + p2Deck.length) > 52 ) {
+        if (p1Deck.length > p2Deck.length) {
+            var longerList = "p1";
+        } else {
+            var longerList = "p2";
+        }
+        if(longerList == "p1") {
+            while((p1Deck.length + p2Deck.length) > 52 )
+                p1Deck = p1Deck.splice(0, p1Deck.length-1)
+        } else {
+            while((p1Deck.length + p2Deck.length) > 52 )
+                p2Deck = p2Deck.splice(0, p2Deck.length-1)
+        }
+        }
     }
 }
+
 
 for (x = 0; x < 10; x++) {
     var officialDeck = createOfficialDeck()

@@ -149,7 +149,21 @@ function playGame(p1Deck, p2Deck) {
                 p2Deck.push(currentPot[i][0]);
             }
         }
-		loadGameResults(p1Card, p1Deck, p2Card, p2Deck, winner);
+        if(p1Deck.length > 52 || p2Deck.length > 52 || (p1Deck.length + p2Deck.length) > 52 ) {
+            if (p1Deck.length > p2Deck.length) {
+                var longerList = "p1";
+            } else {
+                var longerList = "p2";
+            }
+            if(longerList == "p1") {
+                while((p1Deck.length + p2Deck.length) > 52 )
+                    p1Deck = p1Deck.splice(0, p1Deck.length-1)
+            } else {
+                while((p1Deck.length + p2Deck.length) > 52 )
+                    p2Deck = p2Deck.splice(0, p2Deck.length-1)
+            }
+        }
+        loadGameResults(p1Card, p1Deck, p2Card, p2Deck, winner);
     }
 }
 
