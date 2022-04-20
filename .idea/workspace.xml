@@ -4,7 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2f33b4db-6a41-4f03-bab9-0b57a7ab65ba" name="Changes" comment="" />
+    <list default="true" id="2f33b4db-6a41-4f03-bab9-0b57a7ab65ba" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/JSWar.js" beforeDir="false" afterPath="$PROJECT_DIR$/JSWar.js" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -60,6 +62,7 @@
       <option name="presentableId" value="Default" />
       <updated>1650315893658</updated>
       <workItem from="1650315895707" duration="12442000" />
+      <workItem from="1650388831911" duration="647000" />
     </task>
     <servers />
   </component>
