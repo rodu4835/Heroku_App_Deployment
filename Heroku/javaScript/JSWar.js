@@ -309,7 +309,6 @@ function clearRoundWinner(id){
 	document.getElementById(id + 'WinnerFlag').style.visibility = 'hidden';
 }
 
-
 // Clears board and displays the winner
 function displayGameWinner(id){
 	if (id == 'p1'){
@@ -362,16 +361,6 @@ document.querySelector('#fastForwardButton')
 	clearRoundWinner('p1');
 	clearRoundWinner('p2');
 });
-
-
-//document.querySelector('#playerNameTextBox')
-//	.addEventListener('keyup', function(){
-//	createPlayerNames();
-//});
-	
-//function createPlayerNames() {
-//	console.log(document.getElementById('playerNameTextBox').value);
-//}
 
 
 
