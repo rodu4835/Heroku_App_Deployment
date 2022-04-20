@@ -13,6 +13,12 @@
 		</header>
 		<div>
 			<h1>Welcome to Console War!</h1>
+			<input id='playerName'placeholder='Your Name Here'/>
+			<button class='buttonGame' id='playButton'>Play</button>
+			<div>
+				<button class='buttonGame' id='nextButton'>Next Round</button>
+				<button class='buttonGame' id='fastForwardButton'>Skip to End</button>
+			</div>
 			<div class='float-container' id='winnerFlagDiv'>
 				<div id='p1WinnerFlag'></div>
 				<div id='p2WinnerFlag'></div>
@@ -42,12 +48,7 @@
 					</div>
 					<img id='p2CurrentCard'/>
 				</div>
-			</div>
-			<div id='winningPlayer'></div>
-			<div>
-				<button class='buttonGame' id='playButton'>Play</button>
-				<button class='buttonGame' id='nextButton'>Next Round</button>
-				<button class='buttonGame' id='fastForwardButton'>Skip to End</button>
+				<div id='winningPlayer'></div>
 			</div>
 		</div>
 		<script src="./javaScript/JSWar.js"></script>

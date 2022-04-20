@@ -1,159 +1,150 @@
 body {
-	background-color: #9999ff;
+	background: #D0E4F5 url("./static/cardTableBackground.jpg");
 	font-family: "Lucida Console", "Courier New", monospace;
-	text-align: center;
+	background-size: 100% auto;
+	text-align: center
 }
 .buttonHeader{
-  	background-color: #8f8f8f;
-  	border: 2px solid #000000;
-  	color: white;
-  	padding: 15px 32px;
+ 	background-color: #8f8f8f;
+ 	border: 2px solid #000000;
+ 	color: #FFFFFF;
+ 	padding: 15px 32px;
 	border-color: #000000;
-  	text-align: center;
-  	text-decoration: none;
-  	display: inline-block;
+ 	text-align: center;
+ 	text-decoration: none;
+ 	display: inline-block;
  	font-size: 16px;
 	font-family: "Lucida Console", "Courier New", monospace;
-	border-radius: 8px;
+	border-radius: 8px
 }
-
 .buttonGame{
-  	background-color: #8f8f8f;
-  	border: 2px solid #000000;
-  	color: white;
-  	padding: 15px 32px;
+ 	background-color: #8f8f8f;
+ 	border: 2px solid #000000;
+ 	color: #FFFFFF;
+ 	padding: 15px 32px;
 	border-color: #000000;
-  	text-align: center;
-  	text-decoration: none;
-  	display: inline-block;
+ 	text-align: center;
+ 	text-decoration: none;
+ 	display: inline-block;
+ 	font-size: 16px;
+	font-family: "Lucida Console", "Courier New", monospace;
+	border-radius: 8px
+}
+#playerName{
+	background-color: #8f8f8f;
+ 	border: 2px solid #000000;
+ 	color: #FFFFFF;
+ 	padding: 15px 32px;
+	border-color: #000000;
+ 	text-align: center;
+ 	text-decoration: none;
+ 	display: inline-block;
  	font-size: 16px;
 	font-family: "Lucida Console", "Courier New", monospace;
 	border-radius: 8px;
+	visibility: visible
+}
+::placeholder{
+	color: #FFFFFF
 }
 #p1Hand{
-	visibility: hidden;
+	visibility: hidden
 }
 #p2Hand{
-	visibility: hidden;
+	visibility: hidden
 }
 #nextButton{
-	visibility: hidden;
+	visibility: hidden
 }
 #fastForwardButton{
-	float: right;
-	visibility: hidden;
+	visibility: hidden
 }
 #p1DeckDiv{
-	visibility: hidden;
+	visibility: hidden
 }
 #p2DeckDiv{
-	visibility: hidden;
+	visibility: hidden
 }
 #winningPlayer{
+	position: relative;
 	background-color: #8f8f8f;
-	color: white;
-	top: 60%;
-	right: 20%;
-	bottom: 0%;
-	left: 20%;
+	color: #FFFFFF;
+	display: inline-block;
 	justify-content: center;
 	align-content: center;
-	width: auto;
 	margin: auto;
 	height: auto;
-	position: absolute;
-    padding: 10px;
-    border: 2px solid #000000;
+ 	padding: 50px;
+ 	border: 2px solid #000000;
 	border-radius: 8px;
-	visibility: hidden;
+	visibility: hidden
 }
 #p1WinnerFlag{
 	background-color: #8f8f8f;
 	width: auto;
 	height: auto;
-    float: left;
-    padding: 10px;
-    border: 2px solid #000000;
+ 	float: left;
+ 	padding: 10px;
+ 	border: 2px solid #000000;
 	border-radius: 8px;
-	visibility: hidden;
+	visibility: hidden
 }
 #p2WinnerFlag{
 	background-color: #8f8f8f;
 	width: auto;
 	height: auto;
-    float: right;
-    padding: 10px;
-    border: 2px solid #000000;
+ 	float: right;
+ 	padding: 10px;
+	border: 2px solid #000000;
 	border-radius: 8px;
-	visibility: hidden;
+	visibility: hidden
 }
-
-
-#playerNameTextBox{
-	background-color: #8f8f8f;
-  	border: 2px solid #000000;
-  	color: white;
-  	padding: 15px 32px;
-	border-color: #000000;
-  	text-align: center;
-  	text-decoration: none;
-  	display: inline-block;
- 	font-size: 16px;
-	font-family: "Lucida Console", "Courier New", monospace;
-	border-radius: 8px;
-}
-
 .cardInfo{
 	background-color: #8f8f8f;
-  	color: white;
-  	padding: 15px 32px;
+ 	color: #FFFFFF;
+ 	padding: 15px 32px;
 	border-color: #000000;
-  	text-align: center;
-  	text-decoration: none;
-  	display: block;
+ 	text-align: center;
+ 	text-decoration: none;
+ 	display: block;
  	font-size: 16px;
 	font-family: "Lucida Console", "Courier New", monospace;
-	border-radius: 8px;
+	border-radius: 8px
 }
-
 .float-container {
-    padding: 0px;
-	height:auto%;
-	overflow:auto;
+ 	padding: 0px;
+	height: auto%;
+	overflow: auto
 }
-
 .float-child{
 	background-color: #8f8f8f;
 	width: auto;
 	height: auto;
-    float: left;
-    padding: 10px;
-    border: 2px solid #000000;
-	border-radius: 8px;
+ 	float: left;
+ 	padding: 10px;
+ 	border: 2px solid #000000;
+	border-radius: 8px
 }
-
 #p2CardCount{
-	transform: scaleX(-1);
+	transform: scaleX(-1)
 }
 #p2CardName{
-	transform: scaleX(-1);
+	transform: scaleX(-1)
 }
-
 .float-child2{
 	transform: scaleX(-1);
 	background-color: #8f8f8f;
 	width: auto;
 	height: auto;
-    float: right;
-    padding: 10px;
-    border: 2px solid #000000;
-	border-radius: 8px;
+ 	float: right;
+ 	padding: 10px;
+ 	border: 2px solid #000000;
+	border-radius: 8px
 }
-
 img {
-  	display: inline-block;
+ 	display: inline-block;
 	margin: auto;
-	max-height: 400px;
-	height: auto;
-	border-radius: 8px;
+	width: auto;
+	height: 53vh;
+	border-radius: 8px
 }
