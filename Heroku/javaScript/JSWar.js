@@ -104,7 +104,7 @@ function compareFunc(p1Card, p2Card, currentPot, p1Deck, p2Deck) {
     return [winner, currentPot, finalP1Deck, finalP2Deck];
 }
 
-var warMaster = ''
+var warMaster = '';
 
 function playGame(p1Deck, p2Deck) {
     var count = 0;
@@ -183,18 +183,18 @@ function setupGame() {
 
 // FRONT END FUNCTIONS
 
-function stepThroughResults(gameResults, round){
-	displayGame(gameResults, round);
+function stepThroughResults(gameResults, round, playerName){
+	displayGame(gameResults, round, playerName);
 	round = round + 1;
 	return round;
 }
 
-function displayGame(gameResults, round) {
+function displayGame(gameResults, round, playerName) {
 	assignCardInfo(gameResults[round][0], 'p1');
 	assignDeckInfo(gameResults[round][1], 'p1');
 	assignCardInfo(gameResults[round][2], 'p2');
 	assignDeckInfo(gameResults[round][3], 'p2');
-	displayRoundWinner(gameResults[round][4]);
+	displayRoundWinner(gameResults[round][4], playerName);
 }
 
 // Gives card name and image to player hand div container
@@ -292,16 +292,13 @@ function alterPlayButtons(){
 }
 
 // displays winner of each round in the winnerflag div
-function displayRoundWinner(id){
-	var player = ''
+function displayRoundWinner(id, playerName){
 	if (id == 'p1'){
-		player = 'One';
-	} else {
-		player = 'Two';
+		document.getElementById(id + 'WinnerFlag').innerHTML = playerName + " has won this Round!!!";
+	} else if (id == 'p2'){
+		document.getElementById(id + 'WinnerFlag').innerHTML = "The Computer has won this Round!!!";
 	}
-	console.log(id);
 	document.getElementById(id + 'WinnerFlag').style.visibility = 'visible';
-	document.getElementById(id + 'WinnerFlag').innerHTML = "Player " + player + " has won this Round!!!";
 }
 
 // clears the winner flag div
@@ -309,17 +306,26 @@ function clearRoundWinner(id){
 	document.getElementById(id + 'WinnerFlag').style.visibility = 'hidden';
 }
 
-
 // Clears board and displays the winner
-function displayGameWinner(id){
+function displayGameWinner(id, playerName){
 	if (id == 'p1'){
-		document.getElementById('winningPlayer').innerHTML = "Player One has won the game!!!";
+		document.getElementById('p1WinnerFlag').innerHTML = playerName + " has won the game!!!";
+        clearRoundWinner('p2');
 	} else if (id == 'p2'){
-		document.getElementById('winningPlayer').innerHTML = "Player Two has won the game!!!";
+		document.getElementById('p2WinnerFlag').innerHTML = "The Computer has won the game!!!";
+        clearRoundWinner('p1');
 	} else {
 		document.getElementById('winningPlayer').innerHTML = "Over 5000 rounds were played. This game has ended in a draw!!!";
+        document.getElementById('winningPlayer').style.visibility = 'visible';
+        clearRoundWinner('p1');
+        clearRoundWinner('p2');
 	}
-	document.getElementById('winningPlayer').style.visibility = 'visible';
+    document.getElementById(id + 'WinnerFlag').style.visibility = 'visible';
+}
+
+// sets player name variable
+function setPlayerName(){
+    return document.getElementById('playerName').value;
 }
 
 document.querySelector('#restartGame')
@@ -335,12 +341,14 @@ document.querySelector('#about')
 	window.location=('devInfo.html');
 });
 
+var playerName = '';
 document.querySelector('#playButton')
 	.addEventListener('click', function(){
+    playerName = setPlayerName();
 	alterPlayButtons();
 	setupGame();
-	displayGame(gameResults, 0);
-	console.dir(Object.keys(gameResults).length);
+	displayGame(gameResults, 0, playerName);
+    document.getElementById('playerName').style.visibility = 'hidden';
 });
 
 var round = 0;
@@ -349,29 +357,19 @@ document.querySelector('#nextButton')
 	clearRoundWinner('p1');
 	clearRoundWinner('p2');
 	round = round + 1;
-	stepThroughResults(gameResults, round);
+	stepThroughResults(gameResults, round, playerName);
 	if (round == Object.keys(gameResults).length - 1) {
-		displayGameWinner(warMaster);
+		displayGameWinner(warMaster, playerName);
 	}
 });
 
 document.querySelector('#fastForwardButton')
 	.addEventListener('click', function(){
-	displayGameWinner(warMaster);
-	displayGame(gameResults, Object.keys(gameResults).length - 1);
-	clearRoundWinner('p1');
-	clearRoundWinner('p2');
+	displayGame(gameResults, Object.keys(gameResults).length - 1, playerName);
+    displayGameWinner(warMaster, playerName);
+    document.getElementById('nextButton').style.visibility = 'hidden';
+    document.getElementById('fastForwardButton').style.visibility = 'hidden';
 });
-
-
-//document.querySelector('#playerNameTextBox')
-//	.addEventListener('keyup', function(){
-//	createPlayerNames();
-//});
-	
-//function createPlayerNames() {
-//	console.log(document.getElementById('playerNameTextBox').value);
-//}
 
 
 
