@@ -299,7 +299,6 @@ function displayRoundWinner(id){
 	} else {
 		player = 'Two';
 	}
-	console.log(id);
 	document.getElementById(id + 'WinnerFlag').style.visibility = 'visible';
 	document.getElementById(id + 'WinnerFlag').innerHTML = "Player " + player + " has won this Round!!!";
 }
@@ -339,7 +338,6 @@ document.querySelector('#playButton')
 	alterPlayButtons();
 	setupGame();
 	displayGame(gameResults, 0);
-	console.dir(Object.keys(gameResults).length);
 });
 
 var round = 0;
