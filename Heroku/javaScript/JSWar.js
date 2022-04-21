@@ -105,9 +105,9 @@ function compareFunc(p1Card, p2Card, currentPot, p1Deck, p2Deck) {
 }
 
 var warMaster = '';
+var count = 0;
 
 function playGame(p1Deck, p2Deck) {
-    var count = 0;
     while (p1Deck.length != 0 || p2Deck.length != 0) {
         if (count >= 5000) {
             warMaster = 'tie';
@@ -217,13 +217,13 @@ function assignCardImageName(card){
 	var cardValue = card[0][1];
 	var suit = cardName[cardName.length - 1];
 	if (suit == 'C'){
-		suit = 'Clubs';
+		suit = 'Swords';
 	} else if (suit == 'D'){
-		suit = 'Diamonds';
+		suit = 'Wands';
 	} else if (suit == 'H'){
-		suit = 'Hearts';
+		suit = 'Stars';
 	} else if (suit == 'S'){
-		suit = 'Spades';
+		suit = 'Shields';
 	} else {
 		suit = 'Error: No card suit detected.';
 	}
@@ -325,7 +325,7 @@ function displayGameWinner(id, playerName){
 
 // sets player name variable
 function setPlayerName(){
-    return document.getElementById('playerName').value;
+	return document.getElementById('playerName').value;
 }
 
 document.querySelector('#restartGame')
@@ -345,10 +345,15 @@ var playerName = '';
 document.querySelector('#playButton')
 	.addEventListener('click', function(){
     playerName = setPlayerName();
-	alterPlayButtons();
-	setupGame();
-	displayGame(gameResults, 0, playerName);
-    document.getElementById('playerName').style.visibility = 'hidden';
+	if (!playerName) {
+		document.getElementById('playerName').placeholder='Please Enter Your Name!';
+		return;
+	} else {
+		alterPlayButtons();
+		setupGame();
+		displayGame(gameResults, 0, playerName);
+		document.getElementById('playerName').style.visibility = 'hidden';
+	}
 });
 
 var round = 0;
@@ -365,10 +370,10 @@ document.querySelector('#nextButton')
 
 document.querySelector('#fastForwardButton')
 	.addEventListener('click', function(){
+	document.getElementById('nextButton').style.visibility = 'hidden';
+    document.getElementById('fastForwardButton').style.visibility = 'hidden';
 	displayGame(gameResults, Object.keys(gameResults).length - 1, playerName);
     displayGameWinner(warMaster, playerName);
-    document.getElementById('nextButton').style.visibility = 'hidden';
-    document.getElementById('fastForwardButton').style.visibility = 'hidden';
 });
 
 
