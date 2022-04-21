@@ -1,5 +1,5 @@
 import unittest
-import cwt as cwt
+import ConsoleWarTest as cwt
 
 officialDeck = [
     # Hearts
