@@ -183,12 +183,6 @@ function setupGame() {
 
 // FRONT END FUNCTIONS
 
-function stepThroughResults(gameResults, round, playerName){
-	displayGame(gameResults, round, playerName);
-	round = round + 1;
-	return round;
-}
-
 function displayGame(gameResults, round, playerName) {
 	assignCardInfo(gameResults[round][0], 'p1');
 	assignDeckInfo(gameResults[round][1], 'p1');
@@ -362,9 +356,11 @@ document.querySelector('#nextButton')
 	clearRoundWinner('p1');
 	clearRoundWinner('p2');
 	round = round + 1;
-	stepThroughResults(gameResults, round, playerName);
+	displayGame(gameResults, round, playerName);
 	if (round == Object.keys(gameResults).length - 1) {
 		displayGameWinner(warMaster, playerName);
+		document.getElementById('nextButton').style.visibility = 'hidden';
+		document.getElementById('fastForwardButton').style.visibility = 'hidden';
 	}
 });
 
