@@ -1,6 +1,8 @@
 // JavaScript version of the Console War Game.
 // CU CSP
 
+//Funciton to create the original deck
+
 function createOfficialDeck() {
     const theDECK = [
         // Hearts
@@ -19,22 +21,31 @@ function createOfficialDeck() {
     return theDECK
 }
 
+//The below function shuffles a deck of cards
+
 function shuffleDeck(deck) {
-    var funcDeck = deck;
-    var shuffledDeck = [];
+    var funcDeck = deck; //Make the deck a variable
+    var shuffledDeck = []; //Empty deck
+    //The below while loop will run until the original deck is empty.
     while (funcDeck.length != 0) {
-        var rand = Math.floor(Math.random() * funcDeck.length);
-        shuffledDeck.push(funcDeck[rand]);
-        funcDeck.splice(rand, 1);
+        var rand = Math.floor(Math.random() * funcDeck.length); //it then chooses a number at random between 1 and the length of the deck
+        shuffledDeck.push(funcDeck[rand]); //It puts the random card in the shuffled deck
+        funcDeck.splice(rand, 1); //It finally removes the card from the original deck
     };
     return shuffledDeck
 };
+
+//splitDecks takes a deck of cards and splits it into two decks of 26 cards
 
 function splitDecks(deck) {
     var deckOne = deck;
     var deckTwo = deckOne.splice(26,26);
     return [deckOne, deckTwo];
 };
+
+//The compareFunc is a core gameplay funciton. It will compare two drawn cards, 
+//and return who has the larger of  the two values. If there is a tie, it will 
+//then draw four more cards, and return who has the largest final card drwan.
 
 function compareFunc(p1Card, p2Card, currentPot, p1Deck, p2Deck) {
     var p1FuncCard = p1Card[0][1]
@@ -106,6 +117,12 @@ function compareFunc(p1Card, p2Card, currentPot, p1Deck, p2Deck) {
 
 var warMaster = '';
 var count = 0;
+
+
+//The playGame function is the core gameplay loop of the game. It gets takes in input
+//of the players decks, and then will draw two cards and send them to the compare function.
+//It then gets the winner from the compare function, and then gives the pot of cards to the 
+//winner. If both players still have cards, the loop restarts.
 
 function playGame(p1Deck, p2Deck) {
     while (p1Deck.length != 0 || p2Deck.length != 0) {
