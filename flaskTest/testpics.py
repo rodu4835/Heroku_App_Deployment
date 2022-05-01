@@ -22,5 +22,6 @@ for t in officialDeck:
      imageName = os.path.join(savePath, t[0] + '.jpg')
      t += [imageName]
 
+
 cv2.imshow("test", cv2.imread(officialDeck[5][2]))
 cv2.waitKey(0)
