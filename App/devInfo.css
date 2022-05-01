@@ -1,0 +1,26 @@
+body {
+	background-color: #9999ff;
+	font-family: "Lucida Console", "Courier New", monospace;
+	text-align: center;
+}
+.button{
+  	background-color: #8f8f8f;
+  	border: 2px solid #000000;
+  	color: white;
+  	padding: 15px 32px;
+	border-color: #000000;
+  	text-align: center;
+  	text-decoration: none;
+  	display: inline-block;
+ 	font-size: 16px;
+	font-family: "Lucida Console", "Courier New", monospace;
+	border-radius: 8px;
+}
+
+.main{
+	text-align: left;
+	margin-right: 50vh;
+    margin-top: 20px;
+    margin-left: 50vh;
+    margin-bottom: 20px;
+}

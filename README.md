@@ -1,8 +1,16 @@
 # CSPB 3308 Team 3
 
-## Project Milestone 1: Project Proposal
-
 ### Project Title: WAR, What is it Good for? This Project
+
+About This Project:
+
+This web page was created by students at the University of Colorado Boulder for the final project in our software development course during the spring of 2022. The page runs a coded version of the classic card game 'War' in which the user has entered their name and plays against the computer through rounds. The back end Javascript code builds a deck of cards, shuffles it, splits it into two hands (one for each player), then draws the top card from each hand and compares them. The hand that had the higher card gets the pot. In a situation where the cards are tied, the program will draw three more cards from each hand and compare the fourth card. Once one player runs out of cards, the other player is determined to be the winner of the game. If you wish to learn more about the project, please check out our Heroku app at https://consolewar.herokuapp.com/
+
+Program Information:
+  - University of Colorado Boulder
+  - Applied Computer Science Program
+  - Spring 2022
+  - CSPB 3308 Software Development
 
 Team Members:
   - Jordan Sims
@@ -20,11 +28,11 @@ Motivation:
 Risks to Project Completion:
   - New working environment
   - Creating a card structure
-  - Coding Visuals overall
+  - Coding visuals overall
 
 Mitigation Strategy For Above Risks:
   - Researching the new environment
-  - Focuson on using Python for our code to create the card structure
+  - Focus on on using Python for our code to create the card structure
   - Possibly Python librarys for our visuals and art
 
 Development Method:

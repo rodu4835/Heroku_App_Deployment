@@ -1,0 +1,56 @@
+<!-- html file for the home page -->
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Home</title>
+			<link rel='stylesheet' href='index.css'/>
+	</head>
+	<body>
+		<header>
+			<button class='buttonHeader' id='restartGame'>Restart Game</button>
+			<button class='buttonHeader' id='gitSource'>Source on GitHub</button>
+			<button class='buttonHeader' id='about'>About</button>
+		</header>
+		<div>
+			<h1>Welcome to Console War!</h1>
+			<input id='playerName'placeholder='Your Name Here'/>
+			<button class='buttonGame' id='playButton'>Play</button>
+			<div>
+				<button class='buttonGame' id='nextButton'>Next Round</button>
+				<button class='buttonGame' id='fastForwardButton'>Skip to End</button>
+			</div>
+			<div class='float-container' id='winnerFlagDiv'>
+				<div id='p1WinnerFlag'></div>
+				<div id='p2WinnerFlag'></div>
+			</div>
+			<div class='float-container' id='gamePlayDiv'>
+				<div class='float-child' id='p1DeckDiv'>
+					<div class='cardInfo'>
+						<div id='p1CardCount'></div>
+					</div>
+					<img id='p1DeckImage'/>
+				</div>
+				<div class='float-child' id='p1Hand'>
+					<div class='cardInfo'>
+						<div id='p1CardName'></div>
+					</div>
+					<img id='p1CurrentCard'/>
+				</div>
+				<div class='float-child2' id='p2DeckDiv'>
+					<div class='cardInfo'>
+						<div id='p2CardCount'></div>
+					</div>
+					<img id='p2DeckImage'/>
+				</div>
+				<div class='float-child2' id='p2Hand'>
+					<div class='cardInfo'>
+						<div id='p2CardName'></div>
+					</div>
+					<img id='p2CurrentCard'/>
+				</div>
+				<div id='winningPlayer'></div>
+			</div>
+		</div>
+		<script src="./javaScript/JSWar.js"></script>
+	</body>
+</html>

@@ -1,0 +1,151 @@
+body {
+	background: #D0E4F5 url("./static/cardTableBackground.jpg");
+	font-family: "Lucida Console", "Courier New", monospace;
+	background-size: 100% auto;
+	text-align: center
+}
+.buttonHeader{
+ 	background-color: #8f8f8f;
+ 	border: 2px solid #000000;
+ 	color: #FFFFFF;
+ 	padding: 15px 32px;
+	border-color: #000000;
+ 	text-align: center;
+ 	text-decoration: none;
+ 	display: inline-block;
+ 	font-size: 16px;
+	font-family: "Lucida Console", "Courier New", monospace;
+	border-radius: 8px
+}
+.buttonGame{
+ 	background-color: #8f8f8f;
+ 	border: 2px solid #000000;
+ 	color: #FFFFFF;
+ 	padding: 15px 32px;
+	border-color: #000000;
+ 	text-align: center;
+ 	text-decoration: none;
+ 	display: inline-block;
+ 	font-size: 16px;
+	font-family: "Lucida Console", "Courier New", monospace;
+	border-radius: 8px
+}
+#playerName{
+	background-color: #8f8f8f;
+ 	border: 2px solid #000000;
+ 	color: #FFFFFF;
+ 	padding: 15px 5px;
+	border-color: #000000;
+ 	text-align: center;
+ 	text-decoration: none;
+ 	display: inline-block;
+ 	font-size: 16px;
+	font-family: "Lucida Console", "Courier New", monospace;
+	border-radius: 8px;
+	width: 35vh;
+	visibility: visible
+}
+::placeholder{
+	color: #FFFFFF
+}
+#p1Hand{
+	visibility: hidden
+}
+#p2Hand{
+	visibility: hidden
+}
+#nextButton{
+	visibility: hidden
+}
+#fastForwardButton{
+	visibility: hidden
+}
+#p1DeckDiv{
+	visibility: hidden
+}
+#p2DeckDiv{
+	visibility: hidden
+}
+#winningPlayer{
+	position: relative;
+	background-color: #8f8f8f;
+	color: #FFFFFF;
+	display: inline-block;
+	justify-content: center;
+	align-content: center;
+	margin: auto;
+	height: auto;
+ 	padding: 50px;
+ 	border: 2px solid #000000;
+	border-radius: 8px;
+	visibility: hidden
+}
+#p1WinnerFlag{
+	background-color: #8f8f8f;
+	width: auto;
+	height: auto;
+ 	float: left;
+ 	padding: 10px;
+ 	border: 2px solid #000000;
+	border-radius: 8px;
+	visibility: hidden
+}
+#p2WinnerFlag{
+	background-color: #8f8f8f;
+	width: auto;
+	height: auto;
+ 	float: right;
+ 	padding: 10px;
+	border: 2px solid #000000;
+	border-radius: 8px;
+	visibility: hidden
+}
+.cardInfo{
+	background-color: #8f8f8f;
+ 	color: #FFFFFF;
+ 	padding: 15px 32px;
+	border-color: #000000;
+ 	text-align: center;
+ 	text-decoration: none;
+ 	display: block;
+ 	font-size: 16px;
+	font-family: "Lucida Console", "Courier New", monospace;
+	border-radius: 8px
+}
+.float-container {
+ 	padding: 0px;
+	height: auto%;
+	overflow: auto
+}
+.float-child{
+	background-color: #8f8f8f;
+	width: auto;
+	height: auto;
+ 	float: left;
+ 	padding: 10px;
+ 	border: 2px solid #000000;
+	border-radius: 8px
+}
+#p2CardCount{
+	transform: scaleX(-1)
+}
+#p2CardName{
+	transform: scaleX(-1)
+}
+.float-child2{
+	transform: scaleX(-1);
+	background-color: #8f8f8f;
+	width: auto;
+	height: auto;
+ 	float: right;
+ 	padding: 10px;
+ 	border: 2px solid #000000;
+	border-radius: 8px
+}
+img {
+ 	display: inline-block;
+	margin: auto;
+	width: auto;
+	height: 53vh;
+	border-radius: 8px
+}
